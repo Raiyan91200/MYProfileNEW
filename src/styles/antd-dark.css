@@ -1,0 +1,76 @@
+/* Dark mode styles for form elements and Ant Design components */
+.dark {
+  .ant-input,
+  .ant-input-textarea {
+    background-color: #1f2937;
+    border-color: #374151;
+    color: #e5e7eb;
+
+    &:hover,
+    &:focus {
+      border-color: #3b82f6;
+    }
+
+    &::placeholder {
+      color: #9ca3af;
+    }
+  }
+
+  .ant-form-item-label > label {
+    color: #e5e7eb !important;
+  }
+
+  .ant-message {
+    .ant-message-notice-content {
+      background-color: #1f2937;
+      color: #e5e7eb;
+    }
+  }
+
+  .ant-btn {
+    &.ant-btn-primary {
+      background-color: #3b82f6;
+      border-color: #2563eb;
+      color: #ffffff;
+
+      &:hover {
+        background-color: #2563eb;
+        border-color: #1d4ed8;
+      }
+    }
+
+    &.ant-btn-default {
+      background-color: #1f2937;
+      border-color: #374151;
+      color: #e5e7eb;
+
+      &:hover {
+        background-color: #374151;
+        border-color: #4b5563;
+      }
+    }
+  }
+
+  .ant-card {
+    background-color: #1f2937;
+    border-color: #374151;
+
+    .ant-card-head-title {
+      color: #e5e7eb;
+    }
+  }
+
+  .ant-typography {
+    color: #e5e7eb;
+
+    &.ant-typography-secondary {
+      color: #9ca3af;
+    }
+  }
+
+  .ant-tag {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #e5e7eb;
+  }
+}

@@ -1,0 +1,73 @@
+/* Dark mode overrides for Ant Design components */
+.dark {
+    /* Card styles */
+    .ant-card {
+        background-color: #1f2937;
+        border-color: #374151;
+    }
+
+    /* Typography styles */
+    .ant-typography {
+        color: #e5e7eb;
+    }
+
+    /* Button styles */
+    .ant-btn {
+        &:not(.ant-btn-primary) {
+            background-color: #374151;
+            border-color: #4b5563;
+            color: #e5e7eb;
+
+            &:hover {
+                background-color: #4b5563;
+                border-color: #6b7280;
+            }
+        }
+
+        &.ant-btn-primary {
+            background-color: #3b82f6;
+            border-color: #2563eb;
+
+            &:hover {
+                background-color: #2563eb;
+                border-color: #1d4ed8;
+            }
+        }
+    }
+
+    /* Form styles */
+    .ant-form-item-label > label {
+        color: #e5e7eb;
+    }
+
+    .ant-input {
+        background-color: #374151;
+        border-color: #4b5563;
+        color: #e5e7eb;
+
+        &:focus {
+            border-color: #3b82f6;
+        }
+    }
+
+    /* Timeline styles */
+    .ant-timeline-item-tail {
+        border-left-color: #4b5563;
+    }
+
+    .ant-timeline-item-head {
+        background-color: #1f2937;
+    }
+
+    /* Tag styles */
+    .ant-tag {
+        background-color: #374151;
+        border-color: #4b5563;
+        color: #e5e7eb;
+    }
+
+    /* Progress bar */
+    .ant-progress-text {
+        color: #e5e7eb;
+    }
+}

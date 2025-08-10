@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #3498db;
+  --primary-dark: #2980b9;
+  --secondary-color: #2ecc71;
+  --secondary-dark: #27ae60;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  @apply bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300;
+}
+
+/* Dark mode specific styles */
+.dark {
+  /* Section backgrounds */
+  .bg-gradient-section {
+    @apply from-gray-900 via-gray-800 to-gray-900;
+  }
+  
+  /* Card and container styles */
+  .content-card {
+    @apply bg-gray-800 border-gray-700;
+  }
+
+  /* Text styles */
+  .text-content {
+    @apply text-gray-300;
+  }
+  
+  /* Button styles */
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 border-blue-600;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-700 text-gray-100 hover:bg-gray-600 border-gray-600;
+  }
+
+  /* Form input styles */
+  .form-input {
+    @apply bg-gray-800 border-gray-700 text-gray-100;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif;
+  @apply font-bold;
+}
+
+.section {
+  @apply py-20;
+}
+
+.section-title {
+  @apply text-3xl md:text-4xl font-bold text-center mb-12 relative;
+}
+
+.section-title::after {
+  content: '';
+  @apply absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-green-500 rounded;
+}
+
+.btn {
+  @apply inline-block px-6 py-3 rounded-full font-semibold transition-all duration-300;
+}
+
+.btn-primary {
+  @apply bg-blue-500 text-white hover:bg-blue-600 hover:shadow-lg hover:-translate-y-1;
+}
+
+.btn-secondary {
+  @apply border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white hover:shadow-lg hover:-translate-y-1;
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fadeInLeft {
+  animation: fadeInLeft 1s ease;
+}
+
+.animate-fadeInRight {
+  animation: fadeInRight 1s ease;
+}
