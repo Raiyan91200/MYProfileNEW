@@ -17,6 +17,25 @@ const Navbar = () => {
 
     // Removed unused dropdownMenu variable
 
+    const mobileMenu = (
+        <Menu className="w-48 dark:bg-gray-800 dark:text-white">
+            {navLinks.map(link => (
+                <Menu.Item key={link.key} className="dark:hover:bg-gray-700">
+                    <a
+                        href={link.label.props.href}
+                        className={
+                            darkMode
+                                ? "text-gray-200 hover:text-primary-dark"
+                                : "text-gray-900 hover:text-primary"
+                        }
+                    >
+                        {link.label.props.children}
+                    </a>
+                </Menu.Item>
+            ))}
+        </Menu>
+    );
+
     return (
         <header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-900 shadow">
             <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
@@ -53,6 +72,30 @@ const Navbar = () => {
                         style={{ borderRadius: '0.375rem', borderWidth: 1, borderStyle: 'solid' }}
                     />
                 </nav>
+
+                {/* Mobile Navigation */}
+                <div className="md:hidden flex items-center gap-4">
+                    <Button
+                        type="default"
+                        shape="circle"
+                        onClick={toggleTheme}
+                        icon={darkMode ? <BulbFilled style={{ color: '#FFD700' }} /> : <BulbOutlined />}
+                        aria-label="Toggle theme"
+                        className={darkMode ? "bg-gray-800 text-gray-100 border-gray-600" : "bg-gray-200 text-gray-900 border-gray-300"}
+                        style={{ borderRadius: '0.375rem', borderWidth: 1, borderStyle: 'solid' }}
+                    />
+                    <Dropdown 
+                        overlay={mobileMenu} 
+                        trigger={['click']}
+                        overlayClassName="dark:bg-gray-800"
+                    >
+                        <Button
+                            type="default"
+                            icon={<MenuOutlined />}
+                            className={darkMode ? "bg-gray-800 text-gray-100 border-gray-600" : "bg-gray-200 text-gray-900 border-gray-300"}
+                        />
+                    </Dropdown>
+                </div>
             </div>
         </header>
     );
