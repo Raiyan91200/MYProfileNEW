@@ -1,22 +1,20 @@
 // ThemeProvider.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ThemeContext from './ThemeContext';
 
 export const ThemeProvider = ({ children }) => {
-    const [darkMode, setDarkMode] = useState(false);
+    // Permanently set to dark mode
+    const darkMode = true;
 
     useEffect(() => {
-        const isDark = localStorage.getItem('darkMode') === 'true';
-        setDarkMode(isDark);
+        // Always enable dark mode
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('darkMode', 'true');
     }, []);
 
-    useEffect(() => {
-        document.documentElement.classList.toggle('dark', darkMode);
-        localStorage.setItem('darkMode', darkMode);
-    }, [darkMode]);
-
+    // No toggle function needed since it's permanently dark
     const toggleTheme = () => {
-        setDarkMode(!darkMode);
+        // Do nothing - theme is permanently dark
     };
 
     return (

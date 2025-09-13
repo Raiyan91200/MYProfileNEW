@@ -1,0 +1,538 @@
+/* Cyberpunk Animations and Button Effects */
+
+/* Custom CSS Variables for Cyberpunk Theme */
+:root {
+  --cyber-primary: #00ffff;
+  --cyber-secondary: #ff00ff;
+  --cyber-accent: #ffff00;
+  --cyber-glow: #00ff00;
+  --cyber-blue: #0099ff;
+  --cyber-purple: #9900ff;
+  --cyber-pink: #ff0099;
+  --cyber-orange: #ff6600;
+  --cyber-red: #ff0033;
+  
+  /* Animation timings */
+  --transition-fast: 0.2s;
+  --transition-normal: 0.3s;
+  --transition-slow: 0.5s;
+}
+
+/* Keyframe Animations */
+@keyframes cyberpunk-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px var(--cyber-primary),
+      0 0 10px var(--cyber-primary),
+      0 0 15px var(--cyber-primary),
+      0 0 20px var(--cyber-primary);
+  }
+  50% {
+    box-shadow: 
+      0 0 2px var(--cyber-primary),
+      0 0 5px var(--cyber-primary),
+      0 0 8px var(--cyber-primary),
+      0 0 12px var(--cyber-primary);
+  }
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+  50% {
+    text-shadow: 
+      0 0 2px currentColor,
+      0 0 5px currentColor,
+      0 0 8px currentColor;
+  }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes border-flow {
+  0% {
+    border-image-source: linear-gradient(45deg, var(--cyber-primary), var(--cyber-secondary));
+  }
+  25% {
+    border-image-source: linear-gradient(45deg, var(--cyber-secondary), var(--cyber-accent));
+  }
+  50% {
+    border-image-source: linear-gradient(45deg, var(--cyber-accent), var(--cyber-blue));
+  }
+  75% {
+    border-image-source: linear-gradient(45deg, var(--cyber-blue), var(--cyber-purple));
+  }
+  100% {
+    border-image-source: linear-gradient(45deg, var(--cyber-purple), var(--cyber-primary));
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes data-stream {
+  0% {
+    background-position: 0% 0%;
+    opacity: 0.3;
+  }
+  50% {
+    background-position: 100% 100%;
+    opacity: 0.7;
+  }
+  100% {
+    background-position: 0% 0%;
+    opacity: 0.3;
+  }
+}
+
+@keyframes glitch-text {
+  0%, 90%, 100% {
+    transform: translate(0, 0);
+    filter: hue-rotate(0deg);
+  }
+  10% {
+    transform: translate(-2px, -1px);
+    filter: hue-rotate(90deg);
+  }
+  20% {
+    transform: translate(1px, 1px);
+    filter: hue-rotate(180deg);
+  }
+  30% {
+    transform: translate(-1px, 0px);
+    filter: hue-rotate(270deg);
+  }
+  40% {
+    transform: translate(1px, -1px);
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes cyber-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px var(--cyber-blue),
+      0 0 10px var(--cyber-blue),
+      0 0 15px var(--cyber-blue);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 
+      0 0 10px var(--cyber-primary),
+      0 0 20px var(--cyber-primary),
+      0 0 30px var(--cyber-primary);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes scale-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Cyberpunk Button Styles */
+.cyber-btn-primary {
+  position: relative;
+  background: linear-gradient(45deg, var(--cyber-blue), var(--cyber-primary)) !important;
+  background-size: 200% 200% !important;
+  border: 2px solid transparent !important;
+  color: #000 !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  transition: all var(--transition-normal) ease !important;
+  overflow: hidden !important;
+  box-shadow: 
+    0 4px 15px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.cyber-btn-primary:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left var(--transition-slow) ease;
+}
+
+.cyber-btn-primary:hover {
+  background: linear-gradient(45deg, var(--cyber-primary), var(--cyber-secondary)) !important;
+  animation: gradient-shift 2s ease infinite !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 
+    0 8px 25px rgba(0, 255, 255, 0.5),
+    0 0 20px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  color: #000 !important;
+}
+
+.cyber-btn-primary:hover:before {
+  left: 100%;
+}
+
+.cyber-btn-secondary {
+  position: relative;
+  background: linear-gradient(45deg, var(--cyber-purple), var(--cyber-pink)) !important;
+  background-size: 200% 200% !important;
+  border: 2px solid var(--cyber-purple) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  transition: all var(--transition-normal) ease !important;
+  box-shadow: 
+    0 4px 15px rgba(255, 0, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.cyber-btn-secondary:hover {
+  background: linear-gradient(45deg, var(--cyber-pink), var(--cyber-orange)) !important;
+  animation: gradient-shift 2s ease infinite !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 
+    0 8px 25px rgba(255, 0, 255, 0.5),
+    0 0 20px rgba(255, 0, 255, 0.3) !important;
+  border-color: var(--cyber-pink) !important;
+  color: #fff !important;
+}
+
+.cyber-btn-accent {
+  position: relative;
+  background: linear-gradient(45deg, var(--cyber-accent), var(--cyber-orange)) !important;
+  background-size: 200% 200% !important;
+  border: 2px solid var(--cyber-accent) !important;
+  color: #000 !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  transition: all var(--transition-normal) ease !important;
+  box-shadow: 
+    0 4px 15px rgba(255, 255, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.cyber-btn-accent:hover {
+  background: linear-gradient(45deg, var(--cyber-orange), var(--cyber-red)) !important;
+  animation: gradient-shift 2s ease infinite !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 
+    0 8px 25px rgba(255, 255, 0, 0.5),
+    0 0 20px rgba(255, 255, 0, 0.3) !important;
+  color: #000 !important;
+}
+
+/* Cyberpunk Ghost Button */
+.cyber-btn-ghost {
+  background: transparent !important;
+  border: 2px solid var(--cyber-primary) !important;
+  color: var(--cyber-primary) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all var(--transition-normal) ease !important;
+  padding: 5px 5px !important;
+}
+
+.cyber-btn-ghost:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--cyber-primary);
+  transition: left var(--transition-fast) ease;
+  z-index: -1;
+}
+
+.cyber-btn-ghost:hover {
+  color: #000 !important;
+  border-color: var(--cyber-primary) !important;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.5),
+    inset 0 0 20px rgba(0, 255, 255, 0.1) !important;
+  transform: translateY(-2px) !important;
+}
+
+.cyber-btn-ghost:hover:before {
+  left: 0;
+}
+
+/* Social Media Buttons with Cyberpunk Effect */
+.cyber-social-btn {
+  background: rgba(0, 0, 0, 0.3) !important;
+  border: 2px solid rgba(0, 255, 255, 0.3) !important;
+  color: var(--cyber-primary) !important;
+  transition: all var(--transition-normal) ease !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.cyber-social-btn:hover {
+  background: rgba(0, 255, 255, 0.1) !important;
+  border-color: var(--cyber-primary) !important;
+  color: var(--cyber-primary) !important;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 255, 0.5),
+    inset 0 0 15px rgba(0, 255, 255, 0.1) !important;
+  transform: translateY(-3px) scale(1.1) !important;
+  animation: cyberpunk-glow 1.5s ease-in-out infinite !important;
+}
+
+/* Enhanced Cyberpunk Background Effects */
+.cyber-data-stream {
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-data-stream::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.1) 25%, transparent 50%, rgba(255, 0, 255, 0.1) 75%, transparent 100%),
+    linear-gradient(0deg, transparent 0%, rgba(0, 255, 255, 0.05) 50%, transparent 100%);
+  background-size: 200px 100px, 100px 200px;
+  animation: data-stream 4s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cyber-data-stream > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Glitch Text Effect */
+.cyber-glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.cyber-glitch[data-text]::before,
+.cyber-glitch[data-text]::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  color: inherit;
+}
+
+.cyber-glitch[data-text]::before {
+  color: var(--cyber-primary);
+  animation: glitch-text 2s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.cyber-glitch[data-text]::after {
+  color: var(--cyber-secondary);
+  animation: glitch-text 3s infinite reverse;
+  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+}
+
+/* Cyber Pulse Effect */
+.cyber-pulse {
+  animation: cyber-pulse 2s ease-in-out infinite;
+}
+
+/* Typography Consistency */
+.cyber-title-primary {
+  background: linear-gradient(135deg, #3b82f6, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.cyber-title-secondary {
+  color: #60a5fa;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.cyber-text-body {
+  color: #d1d5db;
+  line-height: 1.75;
+  font-weight: 400;
+}
+
+.cyber-text-muted {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Card Hover Effects */
+.cyber-card {
+  background: linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(17, 24, 39, 0.9) 100%) !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
+  border-radius: 12px !important;
+  transition: all var(--transition-normal) ease !important;
+  backdrop-filter: blur(12px) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.cyber-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.05) 0%, 
+    transparent 25%, 
+    transparent 75%, 
+    rgba(16, 185, 129, 0.05) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cyber-card:hover {
+  border-color: rgba(59, 130, 246, 0.5) !important;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(59, 130, 246, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  transform: translateY(-3px) !important;
+}
+
+.cyber-card:hover::before {
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.1) 0%, 
+    transparent 25%, 
+    transparent 75%, 
+    rgba(16, 185, 129, 0.1) 100%);
+}
+
+.cyber-card .ant-card-body {
+  position: relative;
+  z-index: 2;
+}
+
+/* Avatar Glow Effect */
+.cyber-avatar {
+  position: relative !important;
+  transition: all var(--transition-normal) ease !important;
+}
+
+.cyber-avatar:hover {
+  animation: float 3s ease-in-out infinite !important;
+}
+
+.cyber-avatar::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: linear-gradient(45deg, var(--cyber-primary), var(--cyber-secondary)) border-box;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--transition-normal) ease;
+}
+
+.cyber-avatar:hover::after {
+  opacity: 1;
+  animation: border-flow 3s linear infinite;
+}
+
+/* Neon Text Effects */
+.cyber-text-glow {
+  animation: neon-pulse 2s ease-in-out infinite !important;
+}
+
+.cyber-title-glow {
+  position: relative;
+  display: inline-block;
+}
+
+.cyber-title-glow::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: linear-gradient(45deg, var(--cyber-primary), var(--cyber-secondary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: blur(8px);
+  opacity: 0.7;
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+/* Loading/Pulse Effect */
+.cyber-pulse {
+  animation: scale-pulse 2s ease-in-out infinite !important;
+}
+
+/* Dark Mode Cyberpunk Enhancements - Always Active */
+.cyber-card {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border-color: rgba(0, 255, 255, 0.2) !important;
+}
+
+.cyber-card:hover {
+  background: rgba(15, 23, 42, 0.9) !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .cyber-btn-primary,
+  .cyber-btn-secondary,
+  .cyber-btn-accent,
+  .cyber-btn-ghost {
+    font-size: 14px !important;
+    padding: 8px 16px !important;
+    letter-spacing: 0.5px !important;
+  }
+  
+  .cyber-social-btn:hover {
+    transform: translateY(-2px) scale(1.05) !important;
+  }
+  
+  .cyber-card:hover {
+    transform: translateY(-3px) !important;
+  }
+}
+
+/* Reduced Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .cyber-btn-primary,
+  .cyber-btn-secondary,
+  .cyber-btn-accent,
+  .cyber-btn-ghost,
+  .cyber-social-btn,
+  .cyber-card,
+  .cyber-avatar {
+    animation: none !important;
+    transition: none !important;
+  }
+}

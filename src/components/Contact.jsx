@@ -48,60 +48,63 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="section bg-gray-50 dark:bg-gray-900 py-20">
-            <div className="container mx-auto px-4">
-                <Title level={2} className="text-center text-gray-800 dark:text-white mb-16">
-                    Get In Touch
-                </Title>
+        <section id="contact" className="section bg-gray-900 py-12 md:py-20">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12 md:mb-16">
+                    <Title level={2} className="text-center text-white !text-4xl !font-bold !mb-4">
+                        Get In Touch
+                    </Title>
+                    <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto"></div>
+                </div>
 
                 <div
                     ref={ref}
-                    className="flex flex-col lg:flex-row gap-10 max-w-6xl mx-auto"
+                    className="flex flex-col lg:flex-row gap-6 md:gap-10 max-w-6xl mx-auto"
                 >
-                    <Card className="lg:w-2/5 backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 border-gray-200 dark:border-gray-700" variant="outlined">
-                        <Paragraph className="text-gray-600 dark:text-gray-300 mb-8">
+                    <Card className="cyber-card w-full lg:w-2/5 backdrop-blur-sm bg-gray-800/90 border-gray-700" variant="outlined">
+                        <Paragraph className="text-gray-300 mb-6 md:mb-8 text-sm sm:text-base">
                             Feel free to reach out to me via social links or send a message below.
                         </Paragraph>
 
-                        <div className="space-y-8">
-                            <div className="flex items-start gap-4">
-                                <Tooltip title="My Location" className="dark:text-white">
-                                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition-all duration-300 dark:shadow-blue-500/20">
-                                        <EnvironmentOutlined className="text-xl" />
+                        <div className="space-y-6 md:space-y-8">
+                            <div className="flex items-start gap-3 md:gap-4">
+                                <Tooltip title="My Location" className="text-white">
+                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition-all duration-300 shadow-blue-500/20 flex-shrink-0">
+                                        <EnvironmentOutlined className="text-lg md:text-xl" />
                                     </div>
                                 </Tooltip>
-                                <div>
-                                    <Title level={5} className="!mb-1 !text-gray-800 dark:!text-white">Location</Title>
-                                    <Text className="text-gray-600 dark:text-gray-300">Dhaka, Bangladesh</Text>
+                                <div className="min-w-0 flex-1">
+                                    <Title level={5} className="!mb-1 !text-white !text-sm sm:!text-base">Location</Title>
+                                    <Text className="text-gray-300 text-sm sm:text-base">Dhaka, Bangladesh</Text>
                                 </div>
                             </div>
 
-                            <div className="flex items-start gap-4">
-                                <Tooltip title="Email Me" className="dark:text-white">
-                                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition-all duration-300 dark:shadow-blue-500/20">
-                                        <MailOutlined className="text-xl" />
+                            <div className="flex items-start gap-3 md:gap-4">
+                                <Tooltip title="Email Me" className="text-white">
+                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition-all duration-300 shadow-blue-500/20 flex-shrink-0">
+                                        <MailOutlined className="text-lg md:text-xl" />
                                     </div>
                                 </Tooltip>
-                                <div>
-                                    <Title level={5} className="!mb-1 !text-gray-800 dark:!text-white">Email</Title>
-                                    <Text className="text-gray-600 dark:text-gray-300">
-                                        <a href="mailto:raiyannasim91200@gmail.com" className="hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
+                                <div className="min-w-0 flex-1">
+                                    <Title level={5} className="!mb-1 !text-white !text-sm sm:!text-base">Email</Title>
+                                    <Text className="text-gray-300 text-sm sm:text-base break-all">
+                                        <a href="mailto:raiyannasim91200@gmail.com" className="hover:text-blue-400 transition-colors">
                                             raiyannasim91200@gmail.com
                                         </a>
                                     </Text>
                                 </div>
                             </div>
 
-                            <div className="flex items-start gap-4">
-                                <Tooltip title="Call Me" className="dark:text-white">
-                                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition-all duration-300 dark:shadow-blue-500/20">
-                                        <PhoneOutlined className="text-xl" />
+                            <div className="flex items-start gap-3 md:gap-4">
+                                <Tooltip title="Call Me" className="text-white">
+                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition-all duration-300 shadow-blue-500/20 flex-shrink-0">
+                                        <PhoneOutlined className="text-lg md:text-xl" />
                                     </div>
                                 </Tooltip>
-                                <div>
-                                    <Title level={5} className="!mb-1 !text-gray-800 dark:!text-white">Phone</Title>
-                                    <Text className="text-gray-600 dark:text-gray-300">
-                                        <a href="tel:+8801537204470" className="hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
+                                <div className="min-w-0 flex-1">
+                                    <Title level={5} className="!mb-1 !text-white !text-sm sm:!text-base">Phone</Title>
+                                    <Text className="text-gray-300 text-sm sm:text-base">
+                                        <a href="tel:+8801537204470" className="hover:text-blue-400 transition-colors">
                                             +880 1537204470
                                         </a>
                                     </Text>
@@ -110,7 +113,7 @@ const Contact = () => {
                         </div>
                     </Card>
 
-                    <Card className="lg:w-3/5 backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 border-gray-200 dark:border-gray-700" variant="outlined">
+                    <Card className="w-full lg:w-3/5 backdrop-blur-sm bg-gray-800/90 border-gray-700" variant="outlined">
                         <Form
                             form={form}
                             onFinish={handleSubmit}
@@ -128,8 +131,9 @@ const Contact = () => {
                                 name="name"
                                 label="Name"
                                 rules={[{ required: true, message: 'Please enter your name' }]}
+                                className="mb-4 md:mb-6"
                             >
-                                <Input placeholder="Your Name" />
+                                <Input placeholder="Your Name" className="!h-10 sm:!h-12" />
                             </Form.Item>
 
                             <Form.Item
@@ -139,19 +143,21 @@ const Contact = () => {
                                     { required: true, message: 'Please enter your email' },
                                     { type: 'email', message: 'Please enter a valid email' }
                                 ]}
+                                className="mb-4 md:mb-6"
                             >
-                                <Input placeholder="Your Email" />
+                                <Input placeholder="Your Email" className="!h-10 sm:!h-12" />
                             </Form.Item>
 
                             <Form.Item
                                 name="message"
                                 label="Message"
                                 rules={[{ required: true, message: 'Please enter your message' }]}
+                                className="mb-4 md:mb-6"
                             >
                                 <Input.TextArea 
-                                    rows={5} 
+                                    rows={4} 
                                     placeholder="Your Message"
-                                    className="resize-none"
+                                    className="resize-none !text-sm sm:!text-base"
                                     showCount
                                     maxLength={500}
                                 />
@@ -163,9 +169,7 @@ const Contact = () => {
                                     htmlType="submit"
                                     loading={isSubmitting}
                                     icon={<SendOutlined />}
-                                    className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-600 border-0 shadow-lg hover:shadow-xl transition-all 
-                                             dark:from-blue-600 dark:to-blue-700 dark:shadow-blue-500/20
-                                             hover:scale-[1.02] active:scale-[0.98]"
+                                    className="cyber-btn-primary w-full h-10 sm:h-12 text-sm sm:text-base"
                                 >
                                     {isSubmitting ? 'Sending...' : 'Send Message'}
                                 </Button>

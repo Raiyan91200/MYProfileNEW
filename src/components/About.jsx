@@ -22,27 +22,27 @@ const About = () => {
     const icons = [<SafetyCertificateOutlined />, <BugOutlined />, <ToolOutlined />];
 
     return (
-        <section id="about" className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-            <div className="container mx-auto px-4">
+                <section id="about" className="section bg-gray-900 py-12 md:py-20">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     ref={ref}
                     initial={{ opacity: 0, y: 50 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
-                    className="max-w-4xl mx-auto"
+                    className="max-w-6xl mx-auto"
                 >
-                    <div className="text-center mb-16">
-                        <Title level={2} className="!text-4xl !font-bold !mb-4 dark:!text-white relative inline-block group">
+                    <div className="text-center mb-12 md:mb-16">
+                        <Title level={2} className="cyber-title-primary !text-4xl !font-bold !mb-4 relative inline-block group">
                             About Me
-                            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-green-500 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 dark:from-blue-400 dark:to-green-400"></div>
+                            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-green-500 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
                         </Title>
-                        <Paragraph className="!text-lg !text-gray-600 dark:!text-gray-300">
+                        <Paragraph className="cyber-text-body !text-lg max-w-3xl mx-auto">
                             Ensuring Quality in Every Line of Code
                         </Paragraph>
                     </div>
 
                     <Card 
-                        className="shadow-2xl backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 mb-16 hover:transform hover:scale-[1.02] transition-all duration-300" 
+                        className="cyber-card shadow-2xl backdrop-blur-sm bg-gray-800/90 mb-12 md:mb-16 hover:transform hover:scale-[1.02] transition-all duration-300" 
                         bordered={false}
                     >
                         <motion.div
@@ -51,33 +51,31 @@ const About = () => {
                             transition={{ duration: 0.8 }}
                         >
                             <Row gutter={[24, 24]}>
-                                <Col xs={24} md={16}>
-                                    <Paragraph className="!text-lg !text-gray-600 dark:!text-gray-300 mb-6">
-                                        I am a dedicated Software Quality Assurance (SQA) enthusiast with a strong foundation in Computer Science and Engineering. My passion lies in ensuring software reliability, performance, and user satisfaction through comprehensive testing methodologies.
+                                <Col xs={24} lg={16}>
+                                    <Paragraph className="!text-lg !text-gray-300 mb-4 md:mb-6 !leading-relaxed">
+                                        I am a Computer Science student with a strong focus on Software Quality Assurance. Skilled in manual testing, test case design, and agile methodologies, I aim to ensure reliable and user-friendly software.
                                     </Paragraph>
-                                    <Paragraph className="!text-lg !text-gray-600 dark:!text-gray-300 mb-6">
-                                        My journey in QA began with manual testing and has evolved to embrace automation testing, continuous integration, and advanced testing frameworks. I specialize in creating robust test cases, implementing automation solutions, and maintaining high quality standards throughout the development lifecycle.
+                                    <Paragraph className="!text-lg !text-gray-300 !leading-relaxed">
+                                        Currently expanding my skills in automation tools like Selenium and Postman, I bring problem-solving, collaboration, and attention to detail to every project, with the goal of growing into a well-rounded SQA professional.
                                     </Paragraph>
-                                    <Paragraph className="!text-lg !text-gray-600 dark:!text-gray-300">
-                                        Beyond testing, I'm passionate about improving development processes, conducting thorough code reviews, and implementing best practices for quality assurance. I believe that quality is not just about finding bugs, but about preventing them through systematic approaches and proactive measures.
-                                    </Paragraph>
+
                                 </Col>
-                                <Col xs={24} md={8} className="flex items-center justify-center">
-                                    <div className="relative group">
+                                <Col xs={24} lg={8} className="flex items-center justify-center">
+                                    <div className="relative group w-full max-w-sm">
                                         <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-500 rounded-lg blur opacity-30 group-hover:opacity-40 transition-opacity duration-300"></div>
                                         <Card
-                                            className="relative bg-white dark:bg-gray-800 border-none"
+                                            className="cyber-card relative bg-gray-800 border-none w-full"
                                             bordered={false}
                                         >
-                                            <div className="text-center">
-                                                <Title level={4} className="!text-blue-500 dark:!text-blue-400 !mb-2">Testing Expertise</Title>
-                                                <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                                                    <li>Automation Testing</li>
-                                                    <li>Test Case Design</li>
-                                                    <li>Performance Testing</li>
-                                                    <li>CI/CD Integration</li>
-                                                    <li>Bug Tracking</li>
-                                                    <li>Test Documentation</li>
+                                            <div className="text-center p-2 md:p-4">
+                                                <Title level={4} className="!text-blue-400 !mb-2 !text-lg sm:!text-xl">Testing Expertise</Title>
+                                                <ul className="space-y-1 md:space-y-2 text-sm sm:text-base text-gray-300">
+                                                    <li>Manual & Automation Testing</li>
+                                                    <li>Test Case Design & Execution</li>
+                                                    <li>Performance & Functional Testing</li>
+                                                    <li>CI/CD Pipeline Integration</li>
+                                                    <li>Bug Tracking & Reporting</li>
+                                                    <li>Test Documentation & Reporting</li>
                                                 </ul>
                                             </div>
                                         </Card>
@@ -87,9 +85,9 @@ const About = () => {
                         </motion.div>
                     </Card>
 
-                    <Row gutter={[24, 24]} justify="center">
+                    <Row gutter={[16, 16]} justify="center">
                         {stats.map((stat, index) => (
-                            <Col xs={24} sm={8} key={index}>
+                            <Col xs={24} sm={12} md={8} key={index}>
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={inView ? { opacity: 1, scale: 1 } : {}}
@@ -98,23 +96,23 @@ const About = () => {
                                     whileTap={{ scale: 0.95 }}
                                 >
                                     <Card 
-                                        className="text-center h-full backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 hover:shadow-2xl transition-all duration-300"
+                                        className="cyber-card text-center h-full backdrop-blur-sm bg-gray-800/90 hover:shadow-2xl transition-all duration-300"
                                         bordered={false}
                                     >
-                                        <div className="text-5xl text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500 mb-4">
+                                        <div className="text-3xl sm:text-4xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500 mb-3 md:mb-4">
                                             {icons[index]}
                                         </div>
                                         <Statistic
                                             value={stat.number}
                                             valueStyle={{ 
-                                                fontSize: '2.5rem',
+                                                fontSize: window.innerWidth < 640 ? '1.5rem' : '2.5rem',
                                                 color: 'var(--color-primary)',
                                                 background: 'linear-gradient(to right, #3B82F6, #10B981)',
                                                 WebkitBackgroundClip: 'text',
                                                 WebkitTextFillColor: 'transparent'
                                             }}
                                             title={
-                                                <span className="text-lg font-medium text-gray-600 dark:text-gray-400">
+                                                <span className="text-sm sm:text-base md:text-lg font-medium text-gray-600 dark:text-gray-400">
                                                     {stat.label}
                                                 </span>
                                             }

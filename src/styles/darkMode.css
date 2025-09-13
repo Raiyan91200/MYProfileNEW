@@ -1,73 +1,72 @@
-/* Dark mode overrides for Ant Design components */
-.dark {
-    /* Card styles */
-    .ant-card {
-        background-color: #1f2937;
-        border-color: #374151;
-    }
+/* Permanently Dark Mode styles for Ant Design components */
 
-    /* Typography styles */
-    .ant-typography {
-        color: #e5e7eb;
-    }
+/* Card styles */
+.ant-card {
+    background-color: #1f2937;
+    border-color: #374151;
+}
 
-    /* Button styles */
-    .ant-btn {
-        &:not(.ant-btn-primary) {
-            background-color: #374151;
-            border-color: #4b5563;
-            color: #e5e7eb;
+/* Typography styles */
+.ant-typography {
+    color: #e5e7eb;
+}
 
-            &:hover {
-                background-color: #4b5563;
-                border-color: #6b7280;
-            }
-        }
-
-        &.ant-btn-primary {
-            background-color: #3b82f6;
-            border-color: #2563eb;
-
-            &:hover {
-                background-color: #2563eb;
-                border-color: #1d4ed8;
-            }
-        }
-    }
-
-    /* Form styles */
-    .ant-form-item-label > label {
-        color: #e5e7eb;
-    }
-
-    .ant-input {
+/* Button styles */
+.ant-btn {
+    &:not(.ant-btn-primary) {
         background-color: #374151;
         border-color: #4b5563;
         color: #e5e7eb;
 
-        &:focus {
-            border-color: #3b82f6;
+        &:hover {
+            background-color: #4b5563;
+            border-color: #6b7280;
         }
     }
 
-    /* Timeline styles */
-    .ant-timeline-item-tail {
-        border-left-color: #4b5563;
-    }
+    &.ant-btn-primary {
+        background-color: #3b82f6;
+        border-color: #2563eb;
 
-    .ant-timeline-item-head {
-        background-color: #1f2937;
+        &:hover {
+            background-color: #2563eb;
+            border-color: #1d4ed8;
+        }
     }
+}
 
-    /* Tag styles */
-    .ant-tag {
-        background-color: #374151;
-        border-color: #4b5563;
-        color: #e5e7eb;
-    }
+/* Form styles */
+.ant-form-item-label > label {
+    color: #e5e7eb;
+}
 
-    /* Progress bar */
-    .ant-progress-text {
-        color: #e5e7eb;
+.ant-input {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #e5e7eb;
+
+    &:focus {
+        border-color: #3b82f6;
     }
+}
+
+/* Timeline styles */
+.ant-timeline-item-tail {
+    border-left-color: #4b5563;
+}
+
+.ant-timeline-item-head {
+    background-color: #1f2937;
+}
+
+/* Tag styles */
+.ant-tag {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #e5e7eb;
+}
+
+/* Progress bar */
+.ant-progress-text {
+    color: #e5e7eb;
 }

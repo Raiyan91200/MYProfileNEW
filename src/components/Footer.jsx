@@ -38,25 +38,25 @@ const Footer = () => {
     ];
 
     return (
-        <footer className="bg-gray-800 dark:bg-gray-900 text-gray-300 pt-16 pb-8">
-            <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row justify-between gap-10 mb-12">
-                    <div className="md:w-1/3 text-center md:text-left">
-                        <div className="flex justify-center md:justify-start items-center mb-4">
+        <footer className="bg-gray-900 text-gray-300 pt-12 md:pt-16 pb-6 md:pb-8">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-10 mb-8 md:mb-12">
+                    <div className="w-full md:w-1/3 text-center md:text-left">
+                        <div className="flex flex-col sm:flex-row justify-center md:justify-start items-center mb-4">
                             <img
                                 src="https://i.ibb.co.com/fdPC1hLx/ddry.png"
                                 alt="Logo"
-                                className="h-16 w-16 rounded-full object-cover mr-4"
+                                className="h-12 w-12 sm:h-16 sm:w-16 rounded-full object-cover mb-3 sm:mb-0 sm:mr-4"
                             />
-                            <div>
-                                <h3 className="text-xl font-bold">Syed Raiyan Nasim</h3>
-                                <p className="text-gray-400">Computer Science & Engineering Student</p>
+                            <div className="text-center sm:text-left">
+                                <h3 className="text-lg sm:text-xl font-bold">Syed Raiyan Nasim</h3>
+                                <p className="text-gray-400 text-sm sm:text-base">Computer Science & Engineering Student</p>
                             </div>
                         </div>
-                        <p className="text-gray-400 mb-6">
+                        <p className="text-gray-400 mb-4 md:mb-6 text-sm sm:text-base leading-relaxed">
                             Passionate about creating innovative software solutions and exploring the world of technology.
                         </p>
-                        <div className="flex justify-center md:justify-start space-x-4">
+                        <div className="flex justify-center md:justify-start space-x-3 sm:space-x-4">
                             {socialLinks.map((social, index) => (
                                 <a
                                     key={index}
@@ -64,7 +64,7 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label={social.label}
-                                    className="w-10 h-10 rounded-full bg-gray-700 hover:bg-blue-500 flex items-center justify-center transition-colors"
+                                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-700 hover:bg-blue-500 flex items-center justify-center transition-colors text-sm sm:text-base"
                                 >
                                     {social.icon}
                                 </a>
@@ -72,20 +72,20 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    <div className="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div className="w-full md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
                         {footerLinks.map((section, index) => (
                             <div key={index}>
-                                <h4 className="text-lg font-bold mb-4 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-blue-500">
+                                <h4 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-8 sm:after:w-10 after:h-0.5 after:bg-blue-500">
                                     {section.title}
                                 </h4>
-                                <ul className="space-y-3">
+                                <ul className="space-y-2 sm:space-y-3">
                                     {section.links.map((link, linkIndex) => (
                                         <li key={linkIndex}>
                                             <a
                                                 href={link.href}
                                                 target={link.external ? "_blank" : "_self"}
                                                 rel={link.external ? "noopener noreferrer" : ""}
-                                                className="text-gray-400 hover:text-blue-400 transition-colors"
+                                                className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                                             >
                                                 {link.name}
                                             </a>
@@ -97,8 +97,8 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="pt-8 border-t border-gray-700 text-center">
-                    <p>© {year} Syed Raiyan Nasim. All rights reserved.</p>
+                <div className="pt-6 md:pt-8 border-t border-gray-700 text-center">
+                    <p className="text-sm sm:text-base">© {year} Syed Raiyan Nasim. All rights reserved.</p>
                 </div>
             </div>
         </footer>

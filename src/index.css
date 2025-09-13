@@ -15,7 +15,84 @@ html {
 
 body {
   font-family: 'Poppins', sans-serif;
-  @apply bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300;
+  background-color: #111827;
+  color: #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  /* Prevent horizontal scrolling */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Improve touch targets */
+  button, a, input, textarea {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  /* Reduce motion for better performance */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* Improve mobile spacing */
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Better mobile section spacing */
+  .section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  /* Mobile typography adjustments */
+  h1 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  
+  /* Mobile button sizing */
+  .cyber-btn-primary,
+  .cyber-btn-secondary,
+  .cyber-btn-accent,
+  .cyber-btn-ghost {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Mobile card spacing */
+  .cyber-card {
+    padding: 0.75rem;
+  }
+}
+
+/* Improved container styles for mobile */
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Section spacing optimizations */
+.section {
+  @apply py-12 sm:py-16 md:py-20 lg:py-24;
 }
 
 /* Dark mode specific styles */

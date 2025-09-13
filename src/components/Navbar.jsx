@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Menu, Button, Dropdown } from 'antd';
-import { BulbOutlined, BulbFilled, MenuOutlined } from '@ant-design/icons';
-import ThemeContext from '../context/ThemeContext';
+import { MenuOutlined } from '@ant-design/icons';
 
 const Navbar = () => {
-    const { darkMode, toggleTheme } = useContext(ThemeContext);
-
     const navLinks = [
         { label: <a href="#hero">Home</a>, key: 'Home' },
         { label: <a href="#about">About</a>, key: 'About' },
@@ -18,17 +15,14 @@ const Navbar = () => {
     // Removed unused dropdownMenu variable
 
     const mobileMenu = (
-        <Menu className="w-48 dark:bg-gray-800 dark:text-white">
+        <Menu className="w-48 bg-gray-800/95 backdrop-blur-md border border-gray-700/50">
             {navLinks.map(link => (
-                <Menu.Item key={link.key} className="dark:hover:bg-gray-700">
+                <Menu.Item key={link.key} className="hover:bg-gray-700/70 transition-colors duration-300">
                     <a
                         href={link.label.props.href}
-                        className={
-                            darkMode
-                                ? "text-gray-200 hover:text-primary-dark"
-                                : "text-gray-900 hover:text-primary"
-                        }
+                        className="text-gray-200 hover:text-blue-400 transition-colors duration-300 flex items-center py-2"
                     >
+                        <span className="w-2 h-2 bg-gradient-to-r from-blue-500 to-green-500 rounded-full mr-3 opacity-70"></span>
                         {link.label.props.children}
                     </a>
                 </Menu.Item>
@@ -37,14 +31,20 @@ const Navbar = () => {
     );
 
     return (
-        <header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-900 shadow">
-            <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
-                <a href="#hero" className="flex items-center">
-                    <img
-                        src="https://i.ibb.co/6cXBHLyn/a3f9eed3-fe8e-4878-8e24-3c0cda0e408c.jpg"
-                        alt="Logo"
-                        className="h-10 w-10 rounded-full object-cover"
-                    />
+        <header className="fixed top-0 left-0 w-full z-50 bg-gray-900/95 backdrop-blur-md border-b border-gray-700/50 shadow-lg">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+                <a href="#hero" className="flex items-center group">
+                    <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur"></div>
+                        <img
+                            src="https://i.ibb.co/6cXBHLyn/a3f9eed3-fe8e-4878-8e24-3c0cda0e408c.jpg"
+                            alt="Logo"
+                            className="h-10 w-10 rounded-full object-cover border-2 border-transparent group-hover:border-blue-500/50 transition-all duration-300 relative z-10"
+                        />
+                    </div>
+                    <span className="ml-3 text-xl font-bold text-white hidden sm:block group-hover:text-blue-400 transition-colors duration-300">
+                       Syed Raiyan Nasim
+                    </span>
                 </a>
 
                 {/* Desktop Navigation */}
@@ -53,46 +53,27 @@ const Navbar = () => {
                         <a
                             key={link.key}
                             href={link.label.props.href}
-                            className={
-                                darkMode
-                                    ? "text-gray-200 hover:text-primary-dark transition"
-                                    : "text-gray-900 hover:text-primary transition"
-                            }
+                            className="relative text-gray-200 hover:text-blue-400 transition-all duration-300 px-3 py-2 rounded-md group"
                         >
-                            {link.label.props.children}
+                            <span className="relative z-10">{link.label.props.children}</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-green-500/10 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-green-500 group-hover:w-full transition-all duration-300"></div>
                         </a>
                     ))}
-                    <Button
-                        type="default"
-                        shape="circle"
-                        onClick={toggleTheme}
-                        icon={darkMode ? <BulbFilled style={{ color: '#FFD700' }} /> : <BulbOutlined />}
-                        aria-label="Toggle theme"
-                        className={darkMode ? "bg-gray-800 text-gray-100 border-gray-600" : "bg-gray-200 text-gray-900 border-gray-300"}
-                        style={{ borderRadius: '0.375rem', borderWidth: 1, borderStyle: 'solid' }}
-                    />
                 </nav>
 
                 {/* Mobile Navigation */}
-                <div className="md:hidden flex items-center gap-4">
-                    <Button
-                        type="default"
-                        shape="circle"
-                        onClick={toggleTheme}
-                        icon={darkMode ? <BulbFilled style={{ color: '#FFD700' }} /> : <BulbOutlined />}
-                        aria-label="Toggle theme"
-                        className={darkMode ? "bg-gray-800 text-gray-100 border-gray-600" : "bg-gray-200 text-gray-900 border-gray-300"}
-                        style={{ borderRadius: '0.375rem', borderWidth: 1, borderStyle: 'solid' }}
-                    />
+                <div className="md:hidden flex items-center">
                     <Dropdown 
                         overlay={mobileMenu} 
                         trigger={['click']}
-                        overlayClassName="dark:bg-gray-800"
+                        overlayClassName="bg-gray-800/95 backdrop-blur-md border border-gray-700/50"
+                        placement="bottomRight"
                     >
                         <Button
                             type="default"
                             icon={<MenuOutlined />}
-                            className={darkMode ? "bg-gray-800 text-gray-100 border-gray-600" : "bg-gray-200 text-gray-900 border-gray-300"}
+                            className="cyber-btn-ghost border-gray-600 hover:border-blue-500 hover:bg-blue-500/10"
                         />
                     </Dropdown>
                 </div>

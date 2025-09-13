@@ -1,0 +1,273 @@
+/* Additional Cyberpunk Effects and Utilities */
+
+/* Holographic Border Effect */
+.holographic-border {
+  position: relative;
+  background: linear-gradient(45deg, transparent, transparent) padding-box,
+              linear-gradient(45deg, var(--cyber-primary), var(--cyber-secondary), var(--cyber-accent)) border-box;
+  border: 2px solid transparent;
+}
+
+.holographic-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(45deg, var(--cyber-primary), var(--cyber-secondary), var(--cyber-accent));
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Glitch Text Effect */
+@keyframes glitch-1 {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-1px); }
+  80% { transform: translateX(1px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(1px); }
+  30% { transform: translateX(-1px); }
+  50% { transform: translateX(2px); }
+  70% { transform: translateX(-2px); }
+  90% { transform: translateX(1px); }
+}
+
+.cyber-glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.cyber-glitch::before,
+.cyber-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip: rect(0, 900px, 0, 0);
+}
+
+.cyber-glitch::before {
+  animation: glitch-1 2s infinite linear alternate-reverse;
+  color: var(--cyber-primary);
+  z-index: -1;
+}
+
+.cyber-glitch::after {
+  animation: glitch-2 3s infinite linear alternate-reverse;
+  color: var(--cyber-secondary);
+  z-index: -2;
+}
+
+/* Scanning Line Effect */
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.cyber-scan-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-scan-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyber-primary), transparent);
+  animation: scan-line 3s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Matrix Rain Effect Background */
+@keyframes matrix-fall {
+  0% { transform: translateY(-100vh); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.cyber-matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.cyber-matrix-bg::before {
+  content: '0 1 0 1 0 1 0 1 0 1';
+  position: absolute;
+  top: -100vh;
+  left: 0;
+  width: 100%;
+  height: 200vh;
+  color: var(--cyber-glow);
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 20px;
+  opacity: 0.1;
+  animation: matrix-fall 8s linear infinite;
+}
+
+/* Data Stream Effect */
+@keyframes data-stream {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.cyber-data-stream {
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-data-stream::before {
+  content: '01001001 01101110 01101110 01101111 01110110 01100001 01110100 01101001 01101111 01101110';
+  position: absolute;
+  top: 50%;
+  left: -100%;
+  transform: translateY(-50%);
+  color: var(--cyber-primary);
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  opacity: 0.3;
+  white-space: nowrap;
+  animation: data-stream 10s linear infinite;
+  z-index: -1;
+}
+
+/* Energy Pulse Effect */
+@keyframes energy-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px var(--cyber-primary),
+      0 0 10px var(--cyber-primary),
+      0 0 20px var(--cyber-primary),
+      0 0 40px var(--cyber-primary);
+  }
+  50% {
+    box-shadow: 
+      0 0 2px var(--cyber-primary),
+      0 0 5px var(--cyber-primary),
+      0 0 10px var(--cyber-primary),
+      0 0 20px var(--cyber-primary);
+  }
+}
+
+.cyber-energy-pulse {
+  animation: energy-pulse 2s ease-in-out infinite;
+}
+
+/* Typing Effect */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--cyber-primary); }
+}
+
+.cyber-typing {
+  overflow: hidden;
+  border-right: 2px solid var(--cyber-primary);
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret 0.75s step-end infinite;
+}
+
+/* Circuit Board Pattern */
+.cyber-circuit-bg {
+  background-image: 
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  position: relative;
+}
+
+.cyber-circuit-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, var(--cyber-primary) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, var(--cyber-secondary) 2px, transparent 2px);
+  background-size: 40px 40px;
+  opacity: 0.3;
+}
+
+/* HUD Display Effect */
+.cyber-hud {
+  position: relative;
+  border: 1px solid var(--cyber-primary);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.cyber-hud::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(45deg, var(--cyber-primary), var(--cyber-secondary));
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.cyber-hud::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 8px;
+  height: 8px;
+  background: var(--cyber-glow);
+  border-radius: 50%;
+  animation: cyberpunk-glow 1s ease-in-out infinite;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .cyber-glitch::before,
+  .cyber-glitch::after {
+    animation-duration: 1s;
+  }
+  
+  .cyber-matrix-bg::before {
+    font-size: 10px;
+    line-height: 16px;
+  }
+  
+  .cyber-data-stream::before {
+    font-size: 8px;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --cyber-primary: #ffffff;
+    --cyber-secondary: #000000;
+    --cyber-accent: #ffffff;
+  }
+}
