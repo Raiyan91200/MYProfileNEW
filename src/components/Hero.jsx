@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography, Button, Space, Card, Avatar } from 'antd';
 import { FaLinkedinIn, FaGithub, FaTwitter, FaFacebookF, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import { ArrowRightOutlined, MessageOutlined, DownloadOutlined } from '@ant-design/icons';
+import Typewriter from 'react-typewriter-effect';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -20,9 +21,21 @@ const Hero = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
                     <div className="w-full md:w-1/2 text-center md:text-left animate-fadeInLeft">
-                        <Title level={1} className="cyber-glitch !text-[32px] md:!text-6xl !font-bold !mb-4 !text-white !leading-tight" data-text="Syed Raiyan Nasim">
-                            Syed Raiyan Nasim
-                        </Title>
+                        <div className="cyber-glitch !text-[32px] md:!text-6xl !font-bold !mb-4 !text-white !leading-tight">
+                            <Typewriter
+                                text="Syed Raiyan Nasim"
+                                cursorColor="#00ffff"
+                                textStyle={{
+                                    fontSize: 'inherit',
+                                    fontWeight: 'inherit',
+                                    color: 'inherit',
+                                    lineHeight: 'inherit'
+                                }}
+                                typeSpeed={100}
+                                startDelay={500}
+                                hideCursorAfterText={true}
+                            />
+                        </div>
                         <Title level={2} className="!text-2xl !text-blue-400 !font-normal !mt-0 !mb-6 !leading-relaxed">
                             Computer Science & Engineering Student
                         </Title>
