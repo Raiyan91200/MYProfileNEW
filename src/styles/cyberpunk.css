@@ -245,7 +245,7 @@
   position: relative !important;
   overflow: hidden !important;
   transition: all var(--transition-normal) ease !important;
-  padding: 5px 5px !important;
+  padding: 0px 5px !important;
 }
 
 .cyber-btn-ghost:before {

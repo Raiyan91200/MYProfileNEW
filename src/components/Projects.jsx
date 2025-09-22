@@ -12,7 +12,7 @@ const projects = [
         description: 'Automated API tests for key e-commerce workflows on EverShop.io — search, cart operations, and product management.',
         tech: ['Postman', 'Newman', 'JavaScript'],
         link: 'https://github.com/Raiyan91200/Api_Testing-First-evershop.io-with-automation-scripts-',
-        image: '/project-images/evershop-api-testing.jpg',
+        image: '',
         demo: '',
         features: [
             'Search & cart validation via API',
@@ -26,7 +26,7 @@ const projects = [
         description: 'A mobile app for seamless cafeteria ordering with quick menu browsing, QR-based payments, and order tracking.',
         tech: ['Android', 'Firebase', 'Java'],
         link: 'https://github.com/Raiyan91200/OrderUP3',
-        image: '/project-images/orderup.jpg',
+        image: '',
         demo: '',
         features: [
             'User-friendly mobile ordering',
@@ -40,7 +40,7 @@ const projects = [
         description: 'A machine learning-based system that analyzes the FoodPanda Bangladesh dataset to provide personalized restaurant recommendations using sentiment analysis and content-based filtering.',
         tech: ['Python', 'Pandas', 'Scikit-learn', 'TensorFlow', 'NLTK', 'Matplotlib'],
         link: 'https://github.com/Raiyan91200/Restaurant-Recommendation-using-food-Panda-Dataset',
-        image: '/project-images/restaurant-recommendation.jpg',
+        image: '',
         demo: '',
         features: [
             'Sentiment analysis on customer reviews (Bengali and English)',
@@ -56,7 +56,7 @@ const projects = [
         description: 'A full-stack travel platform to explore curated and customizable tour packages, share stories, and plan trips with secure authentication, reviews, and real-time community features.',
         tech: ['React', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'Firebase', 'Stripe'],
         link: 'https://github.com/jibon49/desh-explorer-client',
-        image: '/project-images/desh-explorer.jpg',
+        image: '',
         demo: 'https://desh-explorer.web.app/',
         features: [
             'User authentication and authorization',
@@ -70,7 +70,7 @@ const projects = [
         description: 'An interactive Java application that visualizes sorting algorithms in real-time, helping users understand how different sorting methods work through animated demonstrations.',
         tech: ['Java', 'Swing'],
         link: 'https://github.com/Raiyan91200/SortingAlgorithmsVisualizer-master',
-        image: '/project-images/sorting-algorithms-visualizer.jpg',
+        image: '',
         features: [
             'Real-time visualization of sorting algorithms',
             'Support for multiple sorting methods (Bubble, Quick, Merge, etc.)',
@@ -83,7 +83,7 @@ const projects = [
         description: 'A console-based C application for managing employee records with secure access control, file-based storage, and advanced sorting capabilities.',
         tech: ['C', 'File I/O'],
         link: 'https://github.com/Raiyan91200/EMS1.0',
-        image: '/project-images/employee-management-system-1.jpg',
+        image: '',
         features: [
             'Secure file-based data persistence',
             'Employee record CRUD operations',
@@ -96,7 +96,7 @@ const projects = [
         description: 'A feature-rich Java desktop application with MySQL integration for comprehensive employee data management. Built with Java Swing, this system offers secure authentication, CRUD operations, advanced search, and reporting capabilities.',
         tech: ['Java', 'MySQL', 'JDBC', 'Swing'],
         link: 'https://github.com/Raiyan91200/EMS_2.0',
-        image: '/project-images/employee-management-system-2.jpg',
+        image: '',
         features: [
             'MySQL database integration with JDBC',
             'Modern Swing-based GUI interface',
@@ -109,7 +109,7 @@ const projects = [
         description: 'A command-line utility built with Shell script that provides comprehensive file system operations through an interactive menu interface. Features include file manipulation, directory management, and content operations.',
         tech: ['Shell Script', 'Bash', 'Linux'],
         link: 'https://github.com/Raiyan91200/File-manager',
-        image: '/project-images/shell-file-manager.jpg',
+        image: '',
         features: [
             'Interactive command-line interface',
             'Comprehensive file system operations',
@@ -122,7 +122,7 @@ const projects = [
         description: 'A low-level ATM simulator built in Assembly language that implements core banking operations with secure authentication and transaction processing. Features include balance inquiry, deposits, withdrawals, and account validation.',
         tech: ['Assembly', 'x86'],
         link: 'https://github.com/Raiyan91200/ATM-Machine',
-        image: '/project-images/atm-machine.jpg',
+        image: '',
         features: [
             'Low-level x86 Assembly implementation',
             'Secure PIN authentication system',
@@ -135,7 +135,7 @@ const projects = [
         description: 'A secure messaging application built with Java that features end-to-end encryption using a hybrid cryptographic system. Implements real-time communication through socket programming and provides a modern GUI interface.',
         tech: ['Java', 'Socket Programming', 'Cryptography', 'Swing'],
         link: 'https://github.com/Raiyan91200/Chatapplicationjava',
-        image: '/project-images/encrypted-chat-application.jpg',
+        image: '',
         features: [
             'End-to-end message encryption',
             'Real-time socket communication',
@@ -148,7 +148,7 @@ const projects = [
         description: 'A full-stack e-commerce platform built with PHP and MySQL that provides comprehensive book shopping functionality with secure user authentication and admin management capabilities.',
         tech: ['PHP', 'MySQL', 'JavaScript', 'HTML/CSS'],
         link: 'https://github.com/Raiyan91200/BoiBazar',
-        image: '/project-images/boibazar.jpg',
+        image: '',
         features: [
             'Complete e-commerce functionality',
             'User authentication system',
@@ -167,7 +167,7 @@ const ProjectCard = ({ project }) => {
             className="cyber-card w-full overflow-hidden backdrop-blur-sm bg-gray-800/90 border-gray-700 [&_.ant-card-actions]:bg-gray-800/90 [&_.ant-card-actions]:border-gray-700 h-full flex flex-col"
             cover={
                 <div className="relative group">
-                    <Image
+                    {/* <Image
                         alt={project.title}
                         src={project.image || 'https://placehold.co/400x250/png?text=Project+Preview'}
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -180,7 +180,7 @@ const ProjectCard = ({ project }) => {
                                 </div>
                             )
                         }}
-                    />
+                    />*/}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
             }
@@ -192,7 +192,7 @@ const ProjectCard = ({ project }) => {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="cyber-btn-ghost text-xs sm:text-sm"
+                    className="cyber-btn-ghost text-xs sm:text-sm "
                     size="small"
                 >
                     <span className="hidden sm:inline">Code</span>
