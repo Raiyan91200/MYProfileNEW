@@ -1,12 +1,15 @@
 import React from 'react';
-import { Typography, Button, Space, Card, Avatar } from 'antd';
+import { Typography, Button, Avatar } from 'antd';
 import { FaLinkedinIn, FaGithub, FaTwitter, FaFacebookF, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import { ArrowRightOutlined, MessageOutlined, DownloadOutlined } from '@ant-design/icons';
 import Typewriter from 'react-typewriter-effect';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
-const { Title, Text, Paragraph } = Typography;
+const { Title, Paragraph } = Typography;
 
 const Hero = () => {
+    const sectionRef = useScrollAnimation();
+    
     const socialLinks = [
         { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/raiyannasim91200', label: 'LinkedIn' },
         { icon: <FaGithub />, url: 'https://github.com/Raiyan91200', label: 'GitHub' },
@@ -17,7 +20,7 @@ const Hero = () => {
     ];
 
     return (
-        <section id="hero" className="cyber-data-stream min-h-screen flex items-center bg-gradient-to-br from-gray-800 to-gray-900 pt-16 md:pt-0">
+        <section ref={sectionRef} id="hero" className="min-h-screen flex items-center pt-16 md:pt-0 relative">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
                     <div className="w-full md:w-1/2 text-center md:text-left animate-fadeInLeft">

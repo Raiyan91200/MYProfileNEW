@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { Typography, Form, Input, Button, Card, message, Tooltip } from 'antd';
 import { EnvironmentOutlined, MailOutlined, PhoneOutlined, SendOutlined } from '@ant-design/icons';
 
 const { Title, Text, Paragraph } = Typography;
 const Contact = () => {
+    const sectionRef = useScrollAnimation();
     const [ref] = useInView({
         triggerOnce: true,
         threshold: 0.1,
@@ -48,13 +50,13 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="section bg-gray-900 py-12 md:py-20">
+        <section ref={sectionRef} id="contact" className="section py-12 md:py-20 relative">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12 md:mb-16">
-                    <Title level={2} className="text-center text-white !text-4xl !font-bold !mb-4">
+                    <Title level={2} className="cyber-title-primary !text-4xl !font-bold !mb-4 relative inline-block group">
                         Get In Touch
+                        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-green-500 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
                     </Title>
-                    <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto"></div>
                 </div>
 
                 <div

@@ -12,8 +12,6 @@ const Navbar = () => {
         { label: <a href="#contact">Contact</a>, key: 'Contact' },
     ];
 
-    // Removed unused dropdownMenu variable
-
     const mobileMenu = (
         <Menu className="w-48 bg-gray-800/95 backdrop-blur-md border border-gray-700/50">
             {navLinks.map(link => (
@@ -31,7 +29,7 @@ const Navbar = () => {
     );
 
     return (
-        <header className="fixed top-0 left-0 w-full z-50 bg-gray-900/95 backdrop-blur-md border-b border-gray-700/50 shadow-lg">
+        <header className="fixed top-0 left-0 w-full z-50 bg-gray-900/30 backdrop-blur-xl border-b border-white/10 shadow-2xl">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
                 <a href="#hero" className="flex items-center group">
                     <div className="relative">

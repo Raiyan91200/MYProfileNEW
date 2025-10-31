@@ -1,13 +1,14 @@
 import React from 'react';
-import { Typography, Button, Space, Card, Row, Col, Statistic } from 'antd';
+import { Typography, Card, Row, Col, Statistic } from 'antd';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { BugOutlined, SafetyCertificateOutlined, ToolOutlined } from '@ant-design/icons';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const { Title, Paragraph } = Typography;
-const MotionDiv = motion.div;
 
 const About = () => {
+    const sectionRef = useScrollAnimation();
     const [ref, inView] = useInView({
         triggerOnce: true,
         threshold: 0.1,
@@ -22,7 +23,7 @@ const About = () => {
     const icons = [<SafetyCertificateOutlined />, <BugOutlined />, <ToolOutlined />];
 
     return (
-                <section id="about" className="section bg-gray-900 py-12 md:py-20">
+                <section ref={sectionRef} id="about" className="section py-12 md:py-20 relative">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     ref={ref}

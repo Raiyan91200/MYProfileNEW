@@ -1,22 +1,20 @@
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { Card, Progress, Typography, Tag, Row, Col } from 'antd';
 import { 
     CodeOutlined,
     GithubOutlined,
-    Html5Outlined,
     NodeIndexOutlined,
     DatabaseOutlined,
     ApiOutlined,
     FileTextOutlined,
-    CloudServerOutlined,
     BugOutlined,
     CodeSandboxOutlined
 } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
-const MotionDiv = motion.div;
 const skills = [
     { 
         name: 'Python',
@@ -148,6 +146,7 @@ const SkillCard = ({ name, icon, level, color, tags, controls }) => {
 };
 
 const Skills = () => {
+    const sectionRef = useScrollAnimation();
     const controls = useAnimation();
     const [ref, inView] = useInView({
         triggerOnce: true,
@@ -161,15 +160,13 @@ const Skills = () => {
     }, [controls, inView]);
 
     return (
-        <section id="skills" className="py-12 md:py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <section ref={sectionRef} id="skills" className="py-12 md:py-24 relative">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col items-center mb-12 md:mb-16">
-                    <div className="relative group mb-4 md:mb-6">
-                        <Title level={2} className="!text-4xl !font-bold !text-white text-center">
-                            Technical Skills
-                        </Title>
-                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 h-1 bg-gradient-to-r from-blue-500 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
+                    <Title level={2} className="cyber-title-primary !text-4xl !font-bold !mb-4 relative inline-block group">
+                        Technical Skills
+                        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-green-500 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+                    </Title>
                     <Text className="text-lg text-gray-400 text-center max-w-2xl block px-4">
                         Proficient in various programming languages and technologies
                     </Text>
