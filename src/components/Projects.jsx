@@ -1,13 +1,84 @@
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { Card, Button, Typography, Tag, Row, Col } from 'antd';
+import { Card, Button, Typography, Tag, Row, Col, Pagination } from 'antd';
 import { GithubOutlined, LinkOutlined } from '@ant-design/icons';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const { Title, Paragraph } = Typography;
 
 const projects = [
+    
+    {
+        title: ' Saucedemo Playwright Testing Suite',
+        description: 'Automated Playwright end-to-end tests for Saucedemo (demo e-commerce site) workflows including login, product purchase, and order verification. Generates Allure reports for results.',
+        tech: ['Playwright', 'JavaScript', 'Node.js', 'Allure'],
+        link: 'https://github.com/Raiyan91200/playwright_project',
+        demo: '',
+        features: [
+            'Login & account validation',
+            'Order placement and cart operations',
+            'Page Object Model structure for maintainability',
+            'Allure test reporting with detailed results',
+            'Headed and headless test execution'
+        ]
+    }
+    , {
+        title: 'All Report Template',
+        description: 'A collection of structured QA testing documentation and templates, including bug reports and detailed test case designs for multiple projects.',
+        tech: ['Excel', 'Word', 'Test Documentation'],
+        link: 'https://github.com/Raiyan91200/All_Report_template',
+        demo: '',
+        features: [
+            'Bug report templates (Bug Report.xlsx, doc)',
+            'Comprehensive test suite documentation (OrangeHRM Homepage)',
+            'Detailed test case design spreadsheets',
+            'Repro steps, expected vs actual results, and severity classification'
+        ]
+    
+    }, {
+        title: 'RESTful‑API.dev API Testing Suite',
+        description: 'Comprehensive API testing for the RESTful‑API.dev service using Postman collections and Newman CLI with HTML reporting support.',
+        tech: ['Postman', 'Newman', 'JavaScript', 'AJV (JSON Schema Validator)'],
+        link: 'https://github.com/Raiyan91200/api.restful-api.dev_Api_testing',
+        demo: '',
+        features: [
+            'CRUD endpoint tests against https://api.restful‑api.dev (GET, POST, PUT, PATCH, DELETE)',
+            'Schema validation using JSON schema checks',
+            'Dynamic testing with random ID generation and environment variable usage',
+            'Automated execution via Newman with HTML test reports',
+            'Structured environment and collection files (Postman)'
+        ]
+    }, {
+        title: 'YouTube Automated Test Suite',
+        description: 'End‑to‑end automated testing suite for YouTube search and content validation using Selenium WebDriver, Mocha, and Chai with HTML reporting.',
+        tech: ['Selenium WebDriver', 'Mocha', 'Chai', 'Node.js', 'Mochawesome'],
+        link: 'https://github.com/Raiyan91200/Youtube_test_Suite',
+        demo: '',
+        features: [
+            'Automated YouTube search functionality validation',
+            'Content verification of specific video results',
+            'UI element checks including thumbnails and scroll behavior',
+            'Detailed HTML test reports with Mochawesome',
+            'Screenshots captured on failure for debugging'
+        ]
+    }
+    , {
+        title: 'EverShop End‑to‑End Playwright Test Suite',
+        description: 'A comprehensive Playwright automated UI testing suite for the EverShop e‑commerce demo (demo.evershop.io), built using Page Object Model (POM) with rich reporting via Playwright and Allure.',
+        tech: ['Playwright Test', 'JavaScript', 'Node.js', 'Allure', 'Page Object Model'],
+        link: 'https://github.com/Raiyan91200/Playwright_everShop.Io_',
+        demo: '',
+        features: [
+            'End‑to‑end coverage of browsing, cart, user account, and checkout flows',
+            'Page Object Model for maintainable and reusable test logic',
+            'Supports headed and headless test execution',
+            'Playwright’s HTML reporting plus Allure rich test reports',
+            'CI/CD friendly test configuration with retries and device support'
+        ]
+    }
+    ,
+
     {
         title: 'EverShop API Testing Suite',
         description: 'Automated API tests for key e-commerce workflows on EverShop.io — search, cart operations, and product management.',
@@ -238,6 +309,12 @@ const ProjectCard = ({ project }) => {
 
 const Projects = () => {
     const sectionRef = useScrollAnimation();
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 6;
+
+    const startIndex = (currentPage - 1) * pageSize;
+    const visibleProjects = projects.slice(startIndex, startIndex + pageSize);
+
     const [ref] = useInView({
         triggerOnce: true,
         threshold: 0.1,
@@ -254,12 +331,29 @@ const Projects = () => {
                 </div>
 
                 <Row gutter={[16, 24]} ref={ref} className="max-w-7xl mx-auto">
-                    {projects.map((project, index) => (
+                    {visibleProjects.map((project, index) => (
                         <Col key={index} xs={24} sm={24} md={12} lg={8}>
                             <ProjectCard project={project} />
                         </Col>
                     ))}
                 </Row>
+
+                <div className="flex justify-center mt-8">
+                    <Pagination
+                        current={currentPage}
+                        pageSize={pageSize}
+                        total={projects.length}
+                        className="projects-pagination"
+                        onChange={(page) => {
+                            setCurrentPage(page);
+                            const el = document.getElementById('projects');
+                            if (el) {
+                                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        }}
+                        showSizeChanger={false}
+                    />
+                </div>
             </div>
         </section>
     );

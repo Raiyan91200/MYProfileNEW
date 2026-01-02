@@ -69,7 +69,7 @@ const Hero = () => {
                                 icon={<DownloadOutlined />}
                                 onClick={() => {
                                     const link = document.createElement('a');
-                                    link.href = 'https://drive.usercontent.google.com/download?id=1Hvbg-fMQLeQDp-9dx4KQhiEm6O8yKxw6&export=download&authuser=0&confirm=t&uuid=0cb85ba1-9151-4b83-87d9-9e87cb482f13&at=AN8xHorOpQA-OkIGhh601eRKRFPs:1757779144506';
+                                    link.href = 'https://drive.usercontent.google.com/download?id=1fycb8w_5nvrKaY_Axy1gscvSISeakHNG&export=download&authuser=0';
                                     link.download = 'Syed_Raiyan_Nasim_Resume.pdf';
                                     link.target = '_blank';
                                     link.click();

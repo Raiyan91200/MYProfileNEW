@@ -8,6 +8,7 @@ const Navbar = () => {
         { label: <a href="#about">About</a>, key: 'About' },
         { label: <a href="#skills">Skills</a>, key: 'Skills' },
         { label: <a href="#projects">Projects</a>, key: 'Projects' },
+        { label: <a href="#certificates">Certificates</a>, key: 'Certificates' },
         { label: <a href="#education">Education</a>, key: 'Education' },
         { label: <a href="#contact">Contact</a>, key: 'Contact' },
     ];

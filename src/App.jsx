@@ -8,6 +8,7 @@ import Projects from './components/Projects';
 import Education from './components/Education';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Certificates from './components/Certificates';
 import './styles/antd-dark.css';
 import './styles/darkMode.css';
 
@@ -39,6 +40,7 @@ function App() {
             <Hero />
             <About />
             <Skills />
+            <Certificates />
             <Projects />
             <Education />
             <Contact />

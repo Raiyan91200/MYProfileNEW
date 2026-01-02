@@ -300,6 +300,40 @@
   z-index: 2;
 }
 
+/* ==================== Modal Styles ==================== */
+.cert-modal .ant-modal-content {
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), rgba(3, 7, 18, 0.98)) !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(59, 130, 246, 0.4) !important;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(59, 130, 246, 0.35) !important;
+  overflow: hidden;
+}
+
+.cert-modal .ant-modal-header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.8) !important;
+}
+
+.cert-modal .ant-modal-title {
+  color: #e5e7eb !important;
+}
+
+.cert-modal .ant-modal-body {
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(15, 23, 42, 0.9)) !important;
+}
+
+.cert-modal .ant-modal-close-x {
+  color: #9ca3af !important;
+  transition: color var(--transition-normal) ease, transform var(--transition-normal) ease;
+}
+
+.cert-modal .ant-modal-close-x:hover {
+  color: var(--cyber-primary) !important;
+  transform: rotate(90deg) scale(1.1);
+}
+
 /* ==================== Avatar Effects ==================== */
 .cyber-avatar {
   position: relative !important;
@@ -331,6 +365,50 @@
 .cyber-avatar:hover::after {
   opacity: 1;
   animation: border-flow 3s linear infinite;
+}
+
+/* ==================== Projects Pagination ==================== */
+.projects-pagination .ant-pagination-item {
+  background: rgba(15, 23, 42, 0.9) !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(55, 65, 81, 0.9) !important;
+  box-shadow: 0 0 0 0 rgba(0, 255, 255, 0) !important;
+  transition: all var(--transition-normal) ease !important;
+}
+
+.projects-pagination .ant-pagination-item a {
+  color: #e5e7eb !important;
+}
+
+.projects-pagination .ant-pagination-item-active {
+  border-color: var(--cyber-primary) !important;
+  background: linear-gradient(135deg, var(--cyber-blue), var(--cyber-primary)) !important;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.5) !important;
+}
+
+.projects-pagination .ant-pagination-item-active a {
+  color: #020617 !important;
+}
+
+.projects-pagination .ant-pagination-item:hover {
+  border-color: var(--cyber-primary) !important;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.4) !important;
+}
+
+.projects-pagination .ant-pagination-prev .ant-pagination-item-link,
+.projects-pagination .ant-pagination-next .ant-pagination-item-link {
+  background: rgba(15, 23, 42, 0.9) !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(55, 65, 81, 0.9) !important;
+  color: #e5e7eb !important;
+  transition: all var(--transition-normal) ease !important;
+}
+
+.projects-pagination .ant-pagination-prev .ant-pagination-item-link:hover,
+.projects-pagination .ant-pagination-next .ant-pagination-item-link:hover {
+  border-color: var(--cyber-primary) !important;
+  color: var(--cyber-primary) !important;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.4) !important;
 }
 
 /* ==================== Typography Styles ==================== */
