@@ -4,6 +4,7 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { Card, Button, Typography, Tag, Row, Col, Pagination } from 'antd';
 import { GithubOutlined, LinkOutlined } from '@ant-design/icons';
 import { motion, AnimatePresence } from 'framer-motion';
+import { trackProjectClick } from '../utils/analytics';
 
 const { Title, Paragraph } = Typography;
 
@@ -222,6 +223,14 @@ const projects = [
 const ProjectCard = ({ project }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
+    const handleGithubClick = () => {
+        trackProjectClick(project.title, 'github');
+    };
+
+    const handleDemoClick = () => {
+        trackProjectClick(project.title, 'demo');
+    };
+
     return (
         <Card
             hoverable
@@ -235,6 +244,7 @@ const ProjectCard = ({ project }) => {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={handleGithubClick}
                     className="cyber-btn-ghost text-xs sm:text-sm "
                     size="small"
                 >
@@ -249,6 +259,7 @@ const ProjectCard = ({ project }) => {
                         href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={handleDemoClick}
                         className="cyber-btn-secondary text-xs sm:text-sm"
                         size="small"
                     >

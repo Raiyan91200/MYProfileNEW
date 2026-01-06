@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeProvider';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -9,10 +9,18 @@ import Education from './components/Education';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Certificates from './components/Certificates';
+import { initGA, trackPageView } from './utils/analytics';
 import './styles/antd-dark.css';
 import './styles/darkMode.css';
 
 function App() {
+  useEffect(() => {
+    // Initialize Google Analytics on app mount
+    initGA();
+    // Track initial page view
+    trackPageView(window.location.pathname);
+  }, []);
+
   return (
     <ThemeProvider>
       <div className="min-h-screen relative overflow-hidden">
