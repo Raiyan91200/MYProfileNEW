@@ -1,13 +1,24 @@
 {
   "name": "raiyanprofile",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Portfolio website of Syed Raiyan Nasim - Computer Science & Engineering Student",
+  "author": "Syed Raiyan Nasim <raiyannasim91200@gmail.com>",
+  "keywords": [
+    "portfolio",
+    "react",
+    "vite",
+    "computer-science",
+    "web-developer",
+    "software-engineer"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seo:check": "echo 'Run Lighthouse audit in Chrome DevTools for SEO score'"
   },
   "dependencies": {
     "antd": "^5.26.7",

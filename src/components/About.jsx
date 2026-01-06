@@ -23,7 +23,7 @@ const About = () => {
     const icons = [<SafetyCertificateOutlined />, <BugOutlined />, <ToolOutlined />];
 
     return (
-                <section ref={sectionRef} id="about" className="section py-12 md:py-20 relative">
+                <section ref={sectionRef} id="about" className="section py-12 md:py-20 relative" aria-labelledby="about-heading">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     ref={ref}
@@ -32,15 +32,15 @@ const About = () => {
                     transition={{ duration: 0.6 }}
                     className="max-w-6xl mx-auto"
                 >
-                    <div className="text-center mb-12 md:mb-16">
-                        <Title level={2} className="cyber-title-primary !text-4xl !font-bold !mb-4 relative inline-block group">
+                    <header className="text-center mb-12 md:mb-16">
+                        <Title id="about-heading" level={2} className="cyber-title-primary !text-4xl !font-bold !mb-4 relative inline-block group">
                             About Me
                             <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-green-500 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
                         </Title>
                         <Paragraph className="cyber-text-body !text-lg max-w-3xl mx-auto">
                             Ensuring Quality in Every Line of Code
                         </Paragraph>
-                    </div>
+                    </header>
 
                     <Card 
                         className="cyber-card shadow-2xl backdrop-blur-sm bg-gray-800/90 mb-12 md:mb-16 hover:transform hover:scale-[1.02] transition-all duration-300" 

@@ -20,11 +20,11 @@ const Hero = () => {
     ];
 
     return (
-        <section ref={sectionRef} id="hero" className="min-h-screen flex items-center pt-16 md:pt-0 relative">
+        <section ref={sectionRef} id="hero" className="min-h-screen flex items-center pt-16 md:pt-0 relative" aria-label="Hero Section">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
                     <div className="w-full md:w-1/2 text-center md:text-left animate-fadeInLeft">
-                        <div className="cyber-glitch !text-[32px] md:!text-6xl !font-bold !mb-4 !text-white !leading-tight">
+                        <h1 className="cyber-glitch !text-[32px] md:!text-6xl !font-bold !mb-4 !text-white !leading-tight">
                             <Typewriter
                                 text="Syed Raiyan Nasim"
                                 cursorColor="#00ffff"
@@ -38,7 +38,7 @@ const Hero = () => {
                                 startDelay={500}
                                 hideCursorAfterText={true}
                             />
-                        </div>
+                        </h1>
                         <Title level={2} className="!text-2xl !text-blue-400 !font-normal !mt-0 !mb-6 !leading-relaxed">
                             Computer Science & Engineering Student
                         </Title>
@@ -85,7 +85,7 @@ const Hero = () => {
                         <div className="relative group">
                             <Avatar
                                 src="https://i.ibb.co.com/fdPC1hLx/ddry.png"
-                                alt="Syed Raiyan Nasim"
+                                alt="Syed Raiyan Nasim - Computer Science Engineering Student Portfolio Photo"
                                 size={300}
                                 className="cyber-avatar border-4 border-gray-800 transition-transform duration-300 group-hover:scale-105"
                             />
@@ -94,7 +94,7 @@ const Hero = () => {
                     </div>
                 </div>
 
-                <div className="flex justify-center mt-8 md:mt-12">
+                <nav className="flex justify-center mt-8 md:mt-12" aria-label="Social Media Links">
                     <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
                         {socialLinks.map((social, index) => (
                             <Button
@@ -111,7 +111,7 @@ const Hero = () => {
                             />
                         ))}
                     </div>
-                </div>
+                </nav>
             </div>
         </section>
     );

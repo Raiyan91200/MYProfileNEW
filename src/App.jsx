@@ -10,10 +10,19 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Certificates from './components/Certificates';
 import { initGA, trackPageView } from './utils/analytics';
+import { useMetaTags } from './utils/seo';
 import './styles/antd-dark.css';
 import './styles/darkMode.css';
 
 function App() {
+  // Set up SEO meta tags
+  useMetaTags({
+    title: 'Syed Raiyan Nasim - Computer Science & Engineering Student | Portfolio',
+    description: 'Passionate Computer Science & Engineering student specializing in web development, software engineering, and innovative technology solutions. View my projects, skills, and achievements.',
+    keywords: 'Syed Raiyan Nasim, Raiyan Nasim, Computer Science, Software Engineer, Web Developer, Portfolio, React Developer, Full Stack Developer, CSE Student',
+    url: 'https://raiyan91200-new.vercel.app/'
+  });
+
   useEffect(() => {
     // Initialize Google Analytics on app mount
     initGA();
