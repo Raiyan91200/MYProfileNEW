@@ -234,7 +234,7 @@ const ProjectCard = ({ project }) => {
     return (
         <Card
             hoverable
-            className="cyber-card w-full overflow-hidden backdrop-blur-sm bg-gray-800/90 border-gray-700 [&_.ant-card-actions]:bg-gray-800/90 [&_.ant-card-actions]:border-gray-700 h-full flex flex-col"
+            className="cyber-card w-full overflow-hidden backdrop-blur-sm bg-gray-800/90 border-gray-700 [&_.ant-card-actions]:bg-gray-800/90 [&_.ant-card-actions]:border-gray-700 h-[350px] flex flex-col [&_.ant-card-body]:flex-1 [&_.ant-card-body]:overflow-auto [&_.ant-card-body]:flex [&_.ant-card-body]:flex-col"
             cover={null}
             actions={[
                 <Button
@@ -268,7 +268,7 @@ const ProjectCard = ({ project }) => {
                 )
             ].filter(Boolean)}
         >
-            <div onClick={() => setIsExpanded(!isExpanded)} style={{ cursor: 'pointer' }} className="flex-1">
+            <div onClick={() => setIsExpanded(!isExpanded)} style={{ cursor: 'pointer' }} className="flex-1 overflow-y-auto">
                 <Title level={4} className="!mb-2 sm:!mb-3 !text-white !text-lg sm:!text-xl">
                     {project.title}
                 </Title>
