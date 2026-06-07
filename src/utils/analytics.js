@@ -19,6 +19,7 @@ export const initGA = () => {
 // Track page views
 export const trackPageView = (path) => {
   ReactGA.send({ hitType: 'pageview', page: path });
+  console.log(`[GA PageView] Path: ${path}`);
 };
 
 // Track custom events
@@ -29,6 +30,7 @@ export const trackEvent = (category, action, label = '', value = 0) => {
     label,
     value
   });
+  console.log(`[GA Event] Category: ${category} | Action: ${action} | Label: ${label} | Value: ${value}`);
 };
 
 // Track project clicks
