@@ -4,21 +4,21 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  
+
   // Build optimization
   build: {
     // Generate sourcemaps for production debugging (optional)
     sourcemap: false,
-    
+
     // Minification
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true, // Remove console.logs in production
-        drop_debugger: true
+        drop_console: false, // Keep console.logs in production
+        drop_debugger: false
       }
     },
-    
+
     // Chunk splitting for better caching
     rollupOptions: {
       output: {
@@ -29,19 +29,19 @@ export default defineConfig({
         }
       }
     },
-    
+
     // Asset handling
     assetsInlineLimit: 4096, // Inline assets smaller than 4kb
     chunkSizeWarningLimit: 1000
   },
-  
+
   // Server configuration
   server: {
     port: 3000,
     strictPort: false,
     open: true
   },
-  
+
   // Preview server
   preview: {
     port: 4173,
