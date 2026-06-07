@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react';
-import { ThemeProvider } from './context/ThemeProvider';
+import React, { useState, useEffect } from 'react';
+import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Education from './components/Education';
+import Certificates from './components/Certificates';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Certificates from './components/Certificates';
+import { initSmoothScroll, destroySmoothScroll } from './utils/smoothScroll';
 import { initGA, trackPageView } from './utils/analytics';
 import { useMetaTags } from './utils/seo';
-import './styles/antd-dark.css';
 import './styles/darkMode.css';
 
 function App() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   // Set up SEO meta tags
   useMetaTags({
     title: 'Syed Raiyan Nasim - Computer Science & Engineering Student | Portfolio',
@@ -30,27 +32,56 @@ function App() {
     trackPageView(window.location.pathname);
   }, []);
 
+  useEffect(() => {
+    if (isLoaded) {
+      // Initialize smooth scroll after preloader completes
+      const lenis = initSmoothScroll();
+      
+      return () => {
+        destroySmoothScroll();
+      };
+    }
+  }, [isLoaded]);
+
   return (
-    <ThemeProvider>
-      <div className="min-h-screen relative overflow-hidden">
-        {/* Unified Background for All Sections */}
-        <div className="fixed inset-0 hero-background z-0">
-          {/* Animated Background Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20 animate-gradient-shift"></div>
-          
-          {/* Floating Particles */}
-          <div className="absolute inset-0">
-            <div className="particle particle-1"></div>
-            <div className="particle particle-2"></div>
-            <div className="particle particle-3"></div>
-            <div className="particle particle-4"></div>
-            <div className="particle particle-5"></div>
-            <div className="particle particle-6"></div>
-            <div className="particle particle-7"></div>
-            <div className="particle particle-8"></div>
-          </div>
+    <div className="min-h-screen relative scanline-overlay">
+      {/* Preloader */}
+      {!isLoaded && <Preloader onComplete={() => setIsLoaded(true)} />}
+
+      {/* Main Content */}
+      <div
+        className={`transition-opacity duration-1000 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        {/* Background */}
+        <div className="fixed inset-0 z-0">
+          {/* Gradient background */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `
+                radial-gradient(ellipse at 20% 50%, rgba(0,212,255,0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(178,75,243,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(57,255,20,0.02) 0%, transparent 50%),
+                #0A0A0F
+              `,
+            }}
+          />
+          {/* Subtle grid pattern */}
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px)
+              `,
+              backgroundSize: '60px 60px',
+            }}
+          />
         </div>
-        
+
+        {/* Content */}
         <div className="relative z-10">
           <Navbar />
           <main>
@@ -65,7 +96,7 @@ function App() {
           <Footer />
         </div>
       </div>
-    </ThemeProvider>
+    </div>
   );
 }
 

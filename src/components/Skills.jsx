@@ -1,198 +1,110 @@
-import { motion, useAnimation } from 'framer-motion';
-import { useEffect } from 'react';
+import React from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { Card, Progress, Typography, Tag, Row, Col } from 'antd';
-import { 
-    CodeOutlined,
-    GithubOutlined,
-    NodeIndexOutlined,
-    DatabaseOutlined,
-    ApiOutlined,
-    FileTextOutlined,
-    BugOutlined,
-    CodeSandboxOutlined
-} from '@ant-design/icons';
+import {
+  FaPython, FaJs, FaGitAlt, FaReact, FaNodeJs, FaDatabase, FaRobot
+} from 'react-icons/fa';
+import {
+  SiSelenium, SiPostman, SiUnity
+} from 'react-icons/si';
 
-const { Title, Text } = Typography;
 const skills = [
-    { 
-        name: 'Python',
-        icon: <BugOutlined />,
-        level: 90,
-        color: '#3776AB',
-        tags: ['Problem Solving','Automation']
-    },
-    { 
-        name: 'C',
-        icon: <CodeOutlined />,
-        level: 85,
-        color: '#A8B9CC',
-        tags: ['Data Structures', 'Algorithms']
-    },
-    { 
-        name: 'Java',
-        icon: <CodeSandboxOutlined />,
-        level: 80,
-        color: '#007396',
-        tags: ['Java Swing','Android Development']
-    },
-    { 
-        name: 'JavaScript',
-        icon: <FileTextOutlined />,
-        level: 85,
-        color: '#F7DF1E',
-        tags: ['ES6+', 'React', 'Node.js']
-    },
-    { 
-        name: 'Git',
-        icon: <GithubOutlined />,
-        level: 80,
-        color: '#F05032',
-        tags: ['GitHub']
-    },
-    { 
-        name: 'React',
-        icon: <NodeIndexOutlined />,
-        level: 75,
-        color: '#61DAFB',
-        tags: ['Hooks']
-    },
-    { 
-        name: 'SQL',
-        icon: <DatabaseOutlined />,
-        level: 85,
-        color: '#4479A1',
-        tags: ['MySQL', 'MongoDB']
-    },
-    { 
-        name: 'Node.js',
-        icon: <ApiOutlined />,
-        level: 70,
-        color: '#339933',
-        tags: ['Express', 'REST API']
-    },
+  { name: 'Python', icon: <FaPython />, level: 90, color: '#3776AB', tags: ['Problem Solving', 'Automation'] },
+  { name: 'JavaScript', icon: <FaJs />, level: 85, color: '#F7DF1E', tags: ['ES6+', 'React', 'Node.js'] },
+  { name: 'Playwright', icon: <FaRobot />, level: 80, color: '#2EAD33', tags: ['Automation', 'E2E Testing'] },
+  { name: 'Selenium', icon: <SiSelenium />, level: 85, color: '#43B02A', tags: ['Automation', 'Web Testing'] },
+  { name: 'Postman', icon: <SiPostman />, level: 85, color: '#FF6C37', tags: ['API Testing', 'Integration'] },
+  { name: 'Unity', icon: <SiUnity />, level: 75, color: '#FFFFFF', tags: ['Game Dev', 'Game Testing'] },
+  { name: 'Git', icon: <FaGitAlt />, level: 80, color: '#F05032', tags: ['GitHub', 'Version Control'] },
+  { name: 'React', icon: <FaReact />, level: 75, color: '#61DAFB', tags: ['Hooks', 'UI Dev'] },
+  { name: 'SQL', icon: <FaDatabase />, level: 85, color: '#4479A1', tags: ['MySQL', 'MongoDB'] },
+  { name: 'Node.js', icon: <FaNodeJs />, level: 70, color: '#339933', tags: ['Express', 'REST API'] },
 ];
 
-const SkillCard = ({ name, icon, level, color, tags, controls }) => {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={controls}
-            variants={{
-                visible: { opacity: 1, y: 0 }
-            }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-        >
-            <Card
-                className="cyber-card h-full backdrop-blur-sm bg-gray-800/90 hover:shadow-xl transition-all duration-300 p-2 sm:p-4"
-                bordered={false}
-                style={{ overflow: 'hidden' }}
-            >
-                <div className="relative">
-                    <div className="absolute top-0 right-0 w-16 sm:w-20 h-16 sm:h-20 opacity-5" style={{
-                        background: color,
-                        borderRadius: '0 0 0 100%',
-                        transform: 'scale(2)'
-                    }}></div>
-                    
-                    <div className="text-center mb-3 sm:mb-4">
-                        <span className="text-3xl sm:text-4xl dark:text-opacity-90" style={{ color: color }}>
-                            {icon}
-                        </span>
-                    </div>
+const SkillCard = ({ skill, index, inView }) => {
+  return (
+    <div
+      className="hud-panel p-5 md:p-6 group hover:border-neon-blue/30 transition-all duration-500"
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'translateY(0)' : 'translateY(30px)',
+        transition: `all 0.6s ease ${index * 0.1}s`,
+      }}
+    >
+      {/* Icon */}
+      <div
+        className="text-3xl md:text-4xl mb-4 transition-all duration-300 group-hover:scale-110"
+        style={{ color: skill.color, filter: `drop-shadow(0 0 8px ${skill.color}40)` }}
+      >
+        {skill.icon}
+      </div>
 
-                    <Title level={4} className="text-center mb-3 sm:mb-4 dark:!text-white !text-base sm:!text-lg">
-                        {name}
-                    </Title>
+      {/* Name */}
+      <h3 className="font-orbitron text-sm md:text-base font-semibold text-text-primary tracking-wider mb-4">
+        {skill.name}
+      </h3>
 
-                    <Progress
-                        percent={level}
-                        strokeColor={{
-                            '0%': color,
-                            '100%': color === '#3776AB' ? '#60a5fa' : 
-                                   color === '#A8B9CC' ? '#9ca3af' :
-                                   color === '#007396' ? '#3b82f6' :
-                                   color === '#F7DF1E' ? '#fbbf24' :
-                                   color === '#F05032' ? '#f87171' :
-                                   color === '#61DAFB' ? '#06b6d4' :
-                                   color === '#4479A1' ? '#6366f1' :
-                                   color === '#339933' ? '#10b981' : '#60a5fa'
-                        }}
-                        trailColor="rgba(0,0,0,0.1)"
-                        size="small"
-                        className="mb-3 sm:mb-4 [&_.ant-progress-text]:!text-white [&_.ant-progress-text]:!font-semibold [&_.ant-progress-bg]:!rounded-full [&_.ant-progress-inner]:!rounded-full"
-                        strokeWidth={6}
-                        showInfo={true}
-                        strokeLinecap="round"
-                    />
+      {/* XP Bar */}
+      <div className="mb-3">
+        <div className="flex justify-between mb-1.5">
+          <span className="font-mono text-[10px] text-text-muted tracking-widest">XP LEVEL</span>
+          <span className="font-mono text-[10px] text-neon-green">{skill.level}%</span>
+        </div>
+        <div className="xp-bar">
+          <div
+            className={`xp-bar-fill ${inView ? 'charged' : ''}`}
+            style={{ '--level': `${skill.level}%` }}
+          />
+        </div>
+      </div>
 
-                    <div className="flex flex-wrap gap-1 sm:gap-2 justify-center">
-                        {tags.map((tag, index) => (
-                            <Tag
-                                key={index}
-                                color={color}
-                                style={{ opacity: 0.8, fontSize: '0.75rem' }}
-                                className="text-xs px-2 py-1"
-                            >
-                                {tag}
-                            </Tag>
-                        ))}
-                    </div>
-                </div>
-            </Card>
-        </motion.div>
-    );
+      {/* Tags */}
+      <div className="flex flex-wrap gap-1.5 mt-3">
+        {skill.tags.map((tag, i) => (
+          <span
+            key={i}
+            className="font-mono text-[10px] px-2 py-0.5 border border-white/10 text-text-muted tracking-wider"
+          >
+            [{tag}]
+          </span>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 const Skills = () => {
-    const sectionRef = useScrollAnimation();
-    const controls = useAnimation();
-    const [ref, inView] = useInView({
-        triggerOnce: true,
-        threshold: 0.1,
-    });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-    useEffect(() => {
-        if (inView) {
-            controls.start("visible");
-        }
-    }, [controls, inView]);
+  return (
+    <section id="skills" className="game-section relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Section Label */}
+          <div className="section-code-heading">{'// SKILL_TREE'}</div>
 
-    return (
-        <section ref={sectionRef} id="skills" className="py-12 md:py-24 relative">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col items-center mb-12 md:mb-16">
-                    <Title level={2} className="cyber-title-primary !text-4xl !font-bold !mb-4 relative inline-block group">
-                        Technical Skills
-                        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-green-500 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
-                    </Title>
-                    <Text className="text-lg text-gray-400 text-center max-w-2xl block px-4">
-                        Proficient in various programming languages and technologies
-                    </Text>
-                </div>
+          {/* Section Title */}
+          <h2 className="font-orbitron text-3xl md:text-5xl font-bold mb-4">
+            <span className="text-text-primary">SKILL </span>
+            <span className="text-neon-green" style={{ textShadow: '0 0 20px rgba(57,255,20,0.3)' }}>
+              TREE
+            </span>
+          </h2>
 
-                <Row
-                    ref={ref}
-                    gutter={[16, 16]}
-                    className="max-w-6xl mx-auto"
-                >
-                    {skills.map((skill, index) => (
-                        <Col xs={24} sm={12} md={8} lg={6} key={index}>
-                            <SkillCard
-                                name={skill.name}
-                                icon={skill.icon}
-                                level={skill.level}
-                                color={skill.color}
-                                tags={skill.tags}
-                                controls={controls}
-                            />
-                        </Col>
-                    ))}
-                </Row>
-            </div>
-        </section>
-    );
+          <p className="font-rajdhani text-lg text-text-muted mb-12 md:mb-16 max-w-2xl">
+            Proficient in various programming languages and technologies.
+            Each skill has been leveled up through projects and continuous learning.
+          </p>
+
+          {/* Skills Grid */}
+          <div ref={ref} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {skills.map((skill, index) => (
+              <SkillCard key={index} skill={skill} index={index} inView={inView} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Skills;

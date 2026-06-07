@@ -25,8 +25,7 @@ export default defineConfig({
         manualChunks: {
           // Split vendor code
           'react-vendor': ['react', 'react-dom'],
-          'antd-vendor': ['antd'],
-          'animation-vendor': ['framer-motion', 'react-typewriter-effect']
+          'animation-vendor': ['gsap', 'lenis']
         }
       }
     },

@@ -1,187 +1,181 @@
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { Typography, Form, Input, Button, Card, message, Tooltip } from 'antd';
-import { EnvironmentOutlined, MailOutlined, PhoneOutlined, SendOutlined } from '@ant-design/icons';
+import { FaMapMarkerAlt, FaEnvelope, FaPhone, FaPaperPlane } from 'react-icons/fa';
+import { trackContactSubmit } from '../utils/analytics';
 
-const { Title, Text, Paragraph } = Typography;
 const Contact = () => {
-    const sectionRef = useScrollAnimation();
-    const [ref] = useInView({
-        triggerOnce: true,
-        threshold: 0.1,
-    });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
-    const [form] = Form.useForm();
-    const [isSubmitting, setIsSubmitting] = useState(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) return;
 
-    const handleSubmit = async (values) => {
-        setIsSubmitting(true);
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('https://formspree.io/f/mkgbwrvy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-        try {
-            const response = await fetch('https://formspree.io/f/mkgbwrvy', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(values),
-            });
+      if (response.ok) {
+        trackContactSubmit();
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+      }
+    } catch {
+      // Handle silently
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-            if (response.ok) {
-                message.success({
-                    content: 'Thank you for your message! I will get back to you soon.',
-                    className: 'dark:bg-gray-800 dark:text-white'
-                });
-                form.resetFields();
-            } else {
-                message.error({
-                    content: 'Oops! Something went wrong. Please try again later.',
-                    className: 'dark:bg-gray-800 dark:text-white'
-                });
-            }
-        } catch {
-            message.error({
-                content: 'Network error. Please try again later.',
-                className: 'dark:bg-gray-800 dark:text-white'
-            });
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+  const contactInfo = [
+    { icon: <FaMapMarkerAlt />, label: 'LOCATION', value: 'Dhaka, Bangladesh' },
+    { icon: <FaEnvelope />, label: 'EMAIL', value: 'raiyannasim91200@gmail.com', href: 'mailto:raiyannasim91200@gmail.com' },
+    { icon: <FaPhone />, label: 'COMM', value: '+880 1537204470', href: 'tel:+8801537204470' },
+  ];
 
-    return (
-        <section ref={sectionRef} id="contact" className="section py-12 md:py-20 relative">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12 md:mb-16">
-                    <Title level={2} className="cyber-title-primary !text-4xl !font-bold !mb-4 relative inline-block group">
-                        Get In Touch
-                        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-green-500 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
-                    </Title>
+  return (
+    <section id="contact" className="game-section relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div ref={ref} className="max-w-5xl mx-auto">
+          {/* Section Label */}
+          <div className="section-code-heading">{'// CONNECT'}</div>
+
+          {/* Section Title */}
+          <h2 className="font-orbitron text-3xl md:text-5xl font-bold mb-4">
+            <span className="text-text-muted font-light">READY TO </span>
+            <span
+              className="text-neon-blue block md:inline"
+              style={{ textShadow: '0 0 30px rgba(0,212,255,0.4), 0 0 60px rgba(0,212,255,0.15)' }}
+            >
+              CONNECT?
+            </span>
+          </h2>
+
+          <p className="font-rajdhani text-lg text-text-muted mb-12 md:mb-16 max-w-2xl">
+            Got a project in mind or want to collaborate? Send a transmission and let&apos;s create something amazing together.
+          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 md:gap-16">
+            {/* Contact Info */}
+            <div
+              className="lg:col-span-2 space-y-8"
+              style={{
+                opacity: inView ? 1 : 0,
+                transform: inView ? 'translateX(0)' : 'translateX(-30px)',
+                transition: 'all 0.8s ease',
+              }}
+            >
+              {contactInfo.map((info, index) => (
+                <div key={index} className="flex items-start gap-4">
+                  <div className="w-10 h-10 flex items-center justify-center border border-neon-blue/20 text-neon-blue/60 flex-shrink-0">
+                    {info.icon}
+                  </div>
+                  <div>
+                    <div className="font-mono text-[10px] text-text-muted tracking-[0.2em] mb-1">
+                      {info.label}
+                    </div>
+                    {info.href ? (
+                      <a
+                        href={info.href}
+                        className="font-rajdhani text-text-primary hover:text-neon-blue transition-colors duration-300"
+                      >
+                        {info.value}
+                      </a>
+                    ) : (
+                      <span className="font-rajdhani text-text-primary">{info.value}</span>
+                    )}
+                  </div>
                 </div>
-
-                <div
-                    ref={ref}
-                    className="flex flex-col lg:flex-row gap-6 md:gap-10 max-w-6xl mx-auto"
-                >
-                    <Card className="cyber-card w-full lg:w-2/5 backdrop-blur-sm bg-gray-800/90 border-gray-700" variant="outlined">
-                        <Paragraph className="text-gray-300 mb-6 md:mb-8 text-sm sm:text-base">
-                            Feel free to reach out to me via social links or send a message below.
-                        </Paragraph>
-
-                        <div className="space-y-6 md:space-y-8">
-                            <div className="flex items-start gap-3 md:gap-4">
-                                <Tooltip title="My Location" className="text-white">
-                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition-all duration-300 shadow-blue-500/20 flex-shrink-0">
-                                        <EnvironmentOutlined className="text-lg md:text-xl" />
-                                    </div>
-                                </Tooltip>
-                                <div className="min-w-0 flex-1">
-                                    <Title level={5} className="!mb-1 !text-white !text-sm sm:!text-base">Location</Title>
-                                    <Text className="text-gray-300 text-sm sm:text-base">Dhaka, Bangladesh</Text>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start gap-3 md:gap-4">
-                                <Tooltip title="Email Me" className="text-white">
-                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition-all duration-300 shadow-blue-500/20 flex-shrink-0">
-                                        <MailOutlined className="text-lg md:text-xl" />
-                                    </div>
-                                </Tooltip>
-                                <div className="min-w-0 flex-1">
-                                    <Title level={5} className="!mb-1 !text-white !text-sm sm:!text-base">Email</Title>
-                                    <Text className="text-gray-300 text-sm sm:text-base break-all">
-                                        <a href="mailto:raiyannasim91200@gmail.com" className="hover:text-blue-400 transition-colors">
-                                            raiyannasim91200@gmail.com
-                                        </a>
-                                    </Text>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start gap-3 md:gap-4">
-                                <Tooltip title="Call Me" className="text-white">
-                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition-all duration-300 shadow-blue-500/20 flex-shrink-0">
-                                        <PhoneOutlined className="text-lg md:text-xl" />
-                                    </div>
-                                </Tooltip>
-                                <div className="min-w-0 flex-1">
-                                    <Title level={5} className="!mb-1 !text-white !text-sm sm:!text-base">Phone</Title>
-                                    <Text className="text-gray-300 text-sm sm:text-base">
-                                        <a href="tel:+8801537204470" className="hover:text-blue-400 transition-colors">
-                                            +880 1537204470
-                                        </a>
-                                    </Text>
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
-
-                    <Card className="w-full lg:w-3/5 backdrop-blur-sm bg-gray-800/90 border-gray-700" variant="outlined">
-                        <Form
-                            form={form}
-                            onFinish={handleSubmit}
-                            layout="vertical"
-                            size="large"
-                            className="[&_.ant-form-item-label>label]:!text-gray-700 [&_.ant-form-item-label>label]:dark:!text-gray-300 
-                                     [&_.ant-input]:!bg-white [&_.ant-input]:dark:!bg-gray-700 
-                                     [&_.ant-input]:!border-gray-200 [&_.ant-input]:dark:!border-gray-600
-                                     [&_.ant-input]:!text-gray-800 [&_.ant-input]:dark:!text-gray-200
-                                     [&_.ant-input::placeholder]:!text-gray-400 [&_.ant-input::placeholder]:dark:!text-gray-500
-                                     [&_.ant-input:hover]:!border-blue-500 [&_.ant-input:focus]:!border-blue-500
-                                     [&_.ant-input-textarea-show-count::after]:!text-gray-500 [&_.ant-input-textarea-show-count::after]:dark:!text-gray-400"
-                        >
-                            <Form.Item
-                                name="name"
-                                label="Name"
-                                rules={[{ required: true, message: 'Please enter your name' }]}
-                                className="mb-4 md:mb-6"
-                            >
-                                <Input placeholder="Your Name" className="!h-10 sm:!h-12" />
-                            </Form.Item>
-
-                            <Form.Item
-                                name="email"
-                                label="Email"
-                                rules={[
-                                    { required: true, message: 'Please enter your email' },
-                                    { type: 'email', message: 'Please enter a valid email' }
-                                ]}
-                                className="mb-4 md:mb-6"
-                            >
-                                <Input placeholder="Your Email" className="!h-10 sm:!h-12" />
-                            </Form.Item>
-
-                            <Form.Item
-                                name="message"
-                                label="Message"
-                                rules={[{ required: true, message: 'Please enter your message' }]}
-                                className="mb-4 md:mb-6"
-                            >
-                                <Input.TextArea 
-                                    rows={4} 
-                                    placeholder="Your Message"
-                                    className="resize-none !text-sm sm:!text-base"
-                                    showCount
-                                    maxLength={500}
-                                />
-                            </Form.Item>
-
-                            <Form.Item className="mb-0">
-                                <Button
-                                    type="primary"
-                                    htmlType="submit"
-                                    loading={isSubmitting}
-                                    icon={<SendOutlined />}
-                                    className="cyber-btn-primary w-full h-10 sm:h-12 text-sm sm:text-base"
-                                >
-                                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                    </Card>
-                </div>
+              ))}
             </div>
-        </section>
-    );
+
+            {/* Contact Form */}
+            <div
+              className="lg:col-span-3"
+              style={{
+                opacity: inView ? 1 : 0,
+                transform: inView ? 'translateX(0)' : 'translateX(30px)',
+                transition: 'all 0.8s ease 0.2s',
+              }}
+            >
+              {submitted ? (
+                <div className="hud-panel p-8 text-center">
+                  <div className="font-orbitron text-neon-green text-lg tracking-wider mb-2"
+                    style={{ textShadow: '0 0 15px rgba(57,255,20,0.4)' }}
+                  >
+                    TRANSMISSION SENT
+                  </div>
+                  <p className="font-rajdhani text-text-muted">
+                    Thank you! I&apos;ll get back to you soon.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label className="font-mono text-[10px] text-text-muted tracking-[0.2em] block mb-2">
+                      NAME
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="> enter your name"
+                      required
+                      className="terminal-input"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="font-mono text-[10px] text-text-muted tracking-[0.2em] block mb-2">
+                      EMAIL
+                    </label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="> enter your email"
+                      required
+                      className="terminal-input"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="font-mono text-[10px] text-text-muted tracking-[0.2em] block mb-2">
+                      MESSAGE
+                    </label>
+                    <textarea
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="> type your message..."
+                      required
+                      rows={5}
+                      className="terminal-textarea"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-neon w-full sm:w-auto"
+                  >
+                    <FaPaperPlane className="text-xs" />
+                    {isSubmitting ? 'SENDING...' : 'SEND TRANSMISSION'}
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Contact;

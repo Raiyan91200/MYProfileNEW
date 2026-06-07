@@ -1,373 +1,317 @@
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { Card, Button, Typography, Tag, Row, Col, Pagination } from 'antd';
-import { GithubOutlined, LinkOutlined } from '@ant-design/icons';
-import { motion, AnimatePresence } from 'framer-motion';
-import { trackProjectClick } from '../utils/analytics';
-
-const { Title, Paragraph } = Typography;
+import { FaGithub, FaExternalLinkAlt, FaChevronDown } from 'react-icons/fa';
+import { trackEvent, trackProjectClick } from '../utils/analytics';
 
 const projects = [
-    
-    {
-        title: ' Saucedemo Playwright Testing Suite',
-        description: 'Automated Playwright end-to-end tests for Saucedemo (demo e-commerce site) workflows including login, product purchase, and order verification. Generates Allure reports for results.',
-        tech: ['Playwright', 'JavaScript', 'Node.js', 'Allure'],
-        link: 'https://github.com/Raiyan91200/playwright_project',
-        demo: '',
-        features: [
-            'Login & account validation',
-            'Order placement and cart operations',
-            'Page Object Model structure for maintainability',
-            'Allure test reporting with detailed results',
-            'Headed and headless test execution'
-        ]
-    }
-    , {
-        title: 'All Report Template',
-        description: 'A collection of structured QA testing documentation and templates, including bug reports and detailed test case designs for multiple projects.',
-        tech: ['Excel', 'Word', 'Test Documentation'],
-        link: 'https://github.com/Raiyan91200/All_Report_template',
-        demo: '',
-        features: [
-            'Bug report templates (Bug Report.xlsx, doc)',
-            'Comprehensive test suite documentation (OrangeHRM Homepage)',
-            'Detailed test case design spreadsheets',
-            'Repro steps, expected vs actual results, and severity classification'
-        ]
-    
-    }, {
-        title: 'RESTful‑API.dev API Testing Suite',
-        description: 'Comprehensive API testing for the RESTful‑API.dev service using Postman collections and Newman CLI with HTML reporting support.',
-        tech: ['Postman', 'Newman', 'JavaScript', 'AJV (JSON Schema Validator)'],
-        link: 'https://github.com/Raiyan91200/api.restful-api.dev_Api_testing',
-        demo: '',
-        features: [
-            'CRUD endpoint tests against https://api.restful‑api.dev (GET, POST, PUT, PATCH, DELETE)',
-            'Schema validation using JSON schema checks',
-            'Dynamic testing with random ID generation and environment variable usage',
-            'Automated execution via Newman with HTML test reports',
-            'Structured environment and collection files (Postman)'
-        ]
-    }, {
-        title: 'YouTube Automated Test Suite',
-        description: 'End‑to‑end automated testing suite for YouTube search and content validation using Selenium WebDriver, Mocha, and Chai with HTML reporting.',
-        tech: ['Selenium WebDriver', 'Mocha', 'Chai', 'Node.js', 'Mochawesome'],
-        link: 'https://github.com/Raiyan91200/Youtube_test_Suite',
-        demo: '',
-        features: [
-            'Automated YouTube search functionality validation',
-            'Content verification of specific video results',
-            'UI element checks including thumbnails and scroll behavior',
-            'Detailed HTML test reports with Mochawesome',
-            'Screenshots captured on failure for debugging'
-        ]
-    }
-    , {
-        title: 'EverShop End‑to‑End Playwright Test Suite',
-        description: 'A comprehensive Playwright automated UI testing suite for the EverShop e‑commerce demo (demo.evershop.io), built using Page Object Model (POM) with rich reporting via Playwright and Allure.',
-        tech: ['Playwright Test', 'JavaScript', 'Node.js', 'Allure', 'Page Object Model'],
-        link: 'https://github.com/Raiyan91200/Playwright_everShop.Io_',
-        demo: '',
-        features: [
-            'End‑to‑end coverage of browsing, cart, user account, and checkout flows',
-            'Page Object Model for maintainable and reusable test logic',
-            'Supports headed and headless test execution',
-            'Playwright’s HTML reporting plus Allure rich test reports',
-            'CI/CD friendly test configuration with retries and device support'
-        ]
-    }
-    ,
-
-    {
-        title: 'EverShop API Testing Suite',
-        description: 'Automated API tests for key e-commerce workflows on EverShop.io — search, cart operations, and product management.',
-        tech: ['Postman', 'Newman', 'JavaScript'],
-        link: 'https://github.com/Raiyan91200/Api_Testing-First-evershop.io-with-automation-scripts-',
-        demo: '',
-        features: [
-            'Search & cart validation via API',
-            'Response structure and status code checks',
-            'Automated test reports generation'
-        ]
-    },
-
-    {
-        title: 'OrderUP! – Cafeteria Ordering App',
-        description: 'A mobile app for seamless cafeteria ordering with quick menu browsing, QR-based payments, and order tracking.',
-        tech: ['Android', 'Firebase', 'Java'],
-        link: 'https://github.com/Raiyan91200/OrderUP3',
-        demo: '',
-        features: [
-            'User-friendly mobile ordering',
-            'Secure Firebase authentication',
-            'Real-time order management',
-            'QR code payment support'
-        ]
-    },
-    {
-        title: 'Restaurant Recommendation System',
-        description: 'A machine learning-based system that analyzes the FoodPanda Bangladesh dataset to provide personalized restaurant recommendations using sentiment analysis and content-based filtering.',
-        tech: ['Python', 'Pandas', 'Scikit-learn', 'TensorFlow', 'NLTK', 'Matplotlib'],
-        link: 'https://github.com/Raiyan91200/Restaurant-Recommendation-using-food-Panda-Dataset',
-        demo: '',
-        features: [
-            'Sentiment analysis on customer reviews (Bengali and English)',
-            'Content-based restaurant recommendation engine',
-            'Data preprocessing and feature engineering for mixed-language text',
-            'Visualization of review insights and recommendation trends'
-        ]
-    }, 
-    
-
-    {
-        title: 'Desh Explorer – Travel Platform',
-        description: 'A full-stack travel platform to explore curated and customizable tour packages, share stories, and plan trips with secure authentication, reviews, and real-time community features.',
-        tech: ['React', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'Firebase', 'Stripe'],
-        link: 'https://github.com/jibon49/desh-explorer-client',
-        demo: 'https://desh-explorer.web.app/',
-        features: [
-            'User authentication and authorization',
-            'Real-time booking system',
-            'Payment integration with Stripe',
-            'Interactive tour package customization'
-        ]
-    },
-    {
-        title: 'Sorting Algorithms Visualizer',
-        description: 'An interactive Java application that visualizes sorting algorithms in real-time, helping users understand how different sorting methods work through animated demonstrations.',
-        tech: ['Java', 'Swing'],
-        link: 'https://github.com/Raiyan91200/SortingAlgorithmsVisualizer-master',
-        features: [
-            'Real-time visualization of sorting algorithms',
-            'Support for multiple sorting methods (Bubble, Quick, Merge, etc.)',
-            'Adjustable array size and sorting speed',
-            'Step-by-step algorithm execution view'
-        ]
-    },
-    {
-        title: 'Employee Management System 1.0',
-        description: 'A console-based C application for managing employee records with secure access control, file-based storage, and advanced sorting capabilities.',
-        tech: ['C', 'File I/O'],
-        link: 'https://github.com/Raiyan91200/EMS1.0',
-        features: [
-            'Secure file-based data persistence',
-            'Employee record CRUD operations',
-            'Role-based access control system',
-            'Advanced record sorting and filtering'
-        ]
-    },
-    {
-        title: 'Employee Management System 2.0',
-        description: 'A feature-rich Java desktop application with MySQL integration for comprehensive employee data management. Built with Java Swing, this system offers secure authentication, CRUD operations, advanced search, and reporting capabilities.',
-        tech: ['Java', 'MySQL', 'JDBC', 'Swing'],
-        link: 'https://github.com/Raiyan91200/EMS_2.0',
-        features: [
-            'MySQL database integration with JDBC',
-            'Modern Swing-based GUI interface',
-            'Advanced employee data reporting',
-            'Secure user authentication and authorization'
-        ]
-    },
-    {
-        title: 'Shell-based File Manager',
-        description: 'A command-line utility built with Shell script that provides comprehensive file system operations through an interactive menu interface. Features include file manipulation, directory management, and content operations.',
-        tech: ['Shell Script', 'Bash', 'Linux'],
-        link: 'https://github.com/Raiyan91200/File-manager',
-        features: [
-            'Interactive command-line interface',
-            'Comprehensive file system operations',
-            'Batch file processing capabilities',
-            'File permission management'
-        ]
-    },
-    {
-        title: 'ATM Machine',
-        description: 'A low-level ATM simulator built in Assembly language that implements core banking operations with secure authentication and transaction processing. Features include balance inquiry, deposits, withdrawals, and account validation.',
-        tech: ['Assembly', 'x86'],
-        link: 'https://github.com/Raiyan91200/ATM-Machine',
-        features: [
-            'Low-level x86 Assembly implementation',
-            'Secure PIN authentication system',
-            'Core banking transaction processing',
-            'Account balance management'
-        ]
-    },
-    {
-        title: 'Encrypted Chat Application',
-        description: 'A secure messaging application built with Java that features end-to-end encryption using a hybrid cryptographic system. Implements real-time communication through socket programming and provides a modern GUI interface.',
-        tech: ['Java', 'Socket Programming', 'Cryptography', 'Swing'],
-        link: 'https://github.com/Raiyan91200/Chatapplicationjava',
-        features: [
-            'End-to-end message encryption',
-            'Real-time socket communication',
-            'Modern Swing-based chat interface',
-            'Hybrid cryptographic system'
-        ]
-    },
-    {
-        title: 'BoiBazar - Online Bookstore',
-        description: 'A full-stack e-commerce platform built with PHP and MySQL that provides comprehensive book shopping functionality with secure user authentication and admin management capabilities.',
-        tech: ['PHP', 'MySQL', 'JavaScript', 'HTML/CSS'],
-        link: 'https://github.com/Raiyan91200/BoiBazar',
-        features: [
-            'Complete e-commerce functionality',
-            'User authentication system',
-            'Admin dashboard for inventory management',
-            'Book search and filtering capabilities'
-        ]
-    }
+  {
+    title: 'Saucedemo Playwright Testing Suite',
+    description: 'Automated Playwright end-to-end tests for Saucedemo workflows including login, product purchase, and order verification. Generates Allure reports.',
+    tech: ['Playwright', 'JavaScript', 'Node.js', 'Allure'],
+    link: 'https://github.com/Raiyan91200/playwright_project',
+    demo: '',
+    date: '2025',
+    features: ['Login & account validation', 'Order placement and cart operations', 'Page Object Model structure', 'Allure test reporting', 'Headed and headless execution'],
+  },
+  {
+    title: 'All Report Template',
+    description: 'A collection of structured QA testing documentation and templates, including bug reports and detailed test case designs.',
+    tech: ['Excel', 'Word', 'Test Documentation'],
+    link: 'https://github.com/Raiyan91200/All_Report_template',
+    demo: '',
+    date: '2025',
+    features: ['Bug report templates', 'Comprehensive test suite documentation', 'Detailed test case design spreadsheets', 'Severity classification'],
+  },
+  {
+    title: 'RESTful API Testing Suite',
+    description: 'Comprehensive API testing for RESTful-API.dev using Postman collections and Newman CLI with HTML reporting.',
+    tech: ['Postman', 'Newman', 'JavaScript', 'AJV'],
+    link: 'https://github.com/Raiyan91200/api.restful-api.dev_Api_testing',
+    demo: '',
+    date: '2025',
+    features: ['CRUD endpoint tests', 'Schema validation', 'Dynamic testing with random ID generation', 'Automated Newman execution'],
+  },
+  {
+    title: 'YouTube Automated Test Suite',
+    description: 'End-to-end automated testing suite for YouTube search and content validation using Selenium WebDriver.',
+    tech: ['Selenium', 'Mocha', 'Chai', 'Node.js'],
+    link: 'https://github.com/Raiyan91200/Youtube_test_Suite',
+    demo: '',
+    date: '2025',
+    features: ['Automated YouTube search validation', 'Content verification', 'UI element checks', 'Mochawesome HTML reports'],
+  },
+  {
+    title: 'EverShop E2E Playwright Suite',
+    description: 'Comprehensive Playwright automated UI testing suite for EverShop e-commerce demo, built using Page Object Model.',
+    tech: ['Playwright', 'JavaScript', 'Node.js', 'Allure', 'POM'],
+    link: 'https://github.com/Raiyan91200/Playwright_everShop.Io_',
+    demo: '',
+    date: '2025',
+    features: ['End-to-end coverage of browsing, cart, checkout', 'Page Object Model architecture', 'Allure rich test reports', 'CI/CD friendly config'],
+  },
+  {
+    title: 'EverShop API Testing Suite',
+    description: 'Automated API tests for key e-commerce workflows on EverShop.io — search, cart operations, and product management.',
+    tech: ['Postman', 'Newman', 'JavaScript'],
+    link: 'https://github.com/Raiyan91200/Api_Testing-First-evershop.io-with-automation-scripts-',
+    demo: '',
+    date: '2025',
+    features: ['Search & cart validation via API', 'Response structure checks', 'Automated test reports'],
+  },
+  {
+    title: 'OrderUP! Cafeteria App',
+    description: 'A mobile app for seamless cafeteria ordering with quick menu browsing, QR-based payments, and order tracking.',
+    tech: ['Android', 'Firebase', 'Java'],
+    link: 'https://github.com/Raiyan91200/OrderUP3',
+    demo: '',
+    date: '2024',
+    features: ['User-friendly mobile ordering', 'Firebase authentication', 'Real-time order management', 'QR code payment'],
+  },
+  {
+    title: 'Restaurant Recommendation System',
+    description: 'ML-based system analyzing FoodPanda Bangladesh dataset for personalized restaurant recommendations using sentiment analysis.',
+    tech: ['Python', 'Pandas', 'Scikit-learn', 'TensorFlow'],
+    link: 'https://github.com/Raiyan91200/Restaurant-Recommendation-using-food-Panda-Dataset',
+    demo: '',
+    date: '2024',
+    features: ['Sentiment analysis on reviews', 'Content-based recommendation engine', 'Mixed-language text processing', 'Visualization of insights'],
+  },
+  {
+    title: 'Desh Explorer Travel Platform',
+    description: 'Full-stack travel platform to explore curated tour packages with secure authentication and real-time community features.',
+    tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+    link: 'https://github.com/jibon49/desh-explorer-client',
+    demo: 'https://desh-explorer.web.app/',
+    date: '2024',
+    features: ['User authentication', 'Real-time booking', 'Stripe payment integration', 'Tour package customization'],
+  },
+  {
+    title: 'Sorting Algorithms Visualizer',
+    description: 'Interactive Java application that visualizes sorting algorithms in real-time through animated demonstrations.',
+    tech: ['Java', 'Swing'],
+    link: 'https://github.com/Raiyan91200/SortingAlgorithmsVisualizer-master',
+    demo: '',
+    date: '2024',
+    features: ['Real-time visualization', 'Multiple sorting methods', 'Adjustable speed', 'Step-by-step execution'],
+  },
+  {
+    title: 'Employee Management System 1.0',
+    description: 'Console-based C application for managing employee records with secure access control and file-based storage.',
+    tech: ['C', 'File I/O'],
+    link: 'https://github.com/Raiyan91200/EMS1.0',
+    demo: '',
+    date: '2023',
+    features: ['File-based data persistence', 'CRUD operations', 'Role-based access control', 'Advanced sorting'],
+  },
+  {
+    title: 'Employee Management System 2.0',
+    description: 'Feature-rich Java desktop application with MySQL integration for comprehensive employee data management.',
+    tech: ['Java', 'MySQL', 'JDBC', 'Swing'],
+    link: 'https://github.com/Raiyan91200/EMS_2.0',
+    demo: '',
+    date: '2023',
+    features: ['MySQL integration with JDBC', 'Modern Swing GUI', 'Advanced reporting', 'Secure authentication'],
+  },
+  {
+    title: 'Shell-based File Manager',
+    description: 'Command-line utility built with Shell script providing comprehensive file system operations.',
+    tech: ['Shell', 'Bash', 'Linux'],
+    link: 'https://github.com/Raiyan91200/File-manager',
+    demo: '',
+    date: '2023',
+    features: ['Interactive CLI', 'File system operations', 'Batch processing', 'Permission management'],
+  },
+  {
+    title: 'ATM Machine',
+    description: 'Low-level ATM simulator built in Assembly language with core banking operations and secure authentication.',
+    tech: ['Assembly', 'x86'],
+    link: 'https://github.com/Raiyan91200/ATM-Machine',
+    demo: '',
+    date: '2023',
+    features: ['x86 Assembly implementation', 'PIN authentication', 'Transaction processing', 'Balance management'],
+  },
+  {
+    title: 'Encrypted Chat Application',
+    description: 'Secure messaging app with end-to-end encryption using hybrid cryptographic system and real-time socket communication.',
+    tech: ['Java', 'Socket Programming', 'Cryptography'],
+    link: 'https://github.com/Raiyan91200/Chatapplicationjava',
+    demo: '',
+    date: '2023',
+    features: ['End-to-end encryption', 'Real-time socket communication', 'Modern chat interface', 'Hybrid cryptographic system'],
+  },
+  {
+    title: 'BoiBazar Online Bookstore',
+    description: 'Full-stack e-commerce platform built with PHP and MySQL for comprehensive book shopping.',
+    tech: ['PHP', 'MySQL', 'JavaScript', 'HTML/CSS'],
+    link: 'https://github.com/Raiyan91200/BoiBazar',
+    demo: '',
+    date: '2023',
+    features: ['E-commerce functionality', 'User authentication', 'Admin dashboard', 'Search and filtering'],
+  },
 ];
 
-const ProjectCard = ({ project }) => {
-    const [isExpanded, setIsExpanded] = useState(false);
+const MissionItem = ({ project, index, isExpanded, onToggle }) => {
+  const number = String(index + 1).padStart(2, '0');
 
-    const handleGithubClick = () => {
-        trackProjectClick(project.title, 'github');
-    };
+  return (
+    <div className="border-b border-white/5 last:border-b-0">
+      <div
+        className="mission-item"
+        onClick={onToggle}
+      >
+        <span className="mission-number">[{number}]</span>
+        <div className="flex-1 min-w-0">
+          <div className="mission-name">{project.title}</div>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {project.tech.slice(0, 3).map((t, i) => (
+              <span key={i} className="font-mono text-[10px] text-text-muted/60 tracking-wider">
+                {t}{i < Math.min(project.tech.length, 3) - 1 ? ' ·' : ''}
+              </span>
+            ))}
+          </div>
+        </div>
+        <span className="mission-date">// {project.date}</span>
+        <FaChevronDown
+          className={`text-text-muted/40 text-xs transition-transform duration-300 ml-2 flex-shrink-0 ${isExpanded ? 'rotate-180' : ''
+            }`}
+        />
+      </div>
 
-    const handleDemoClick = () => {
-        trackProjectClick(project.title, 'demo');
-    };
+      {/* Expanded Details */}
+      <div
+        className={`overflow-hidden transition-all duration-500 ease-out ${isExpanded ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+      >
+        <div className="pl-12 md:pl-20 pr-6 pb-6 space-y-4">
+          <p className="font-rajdhani text-text-primary/60 leading-relaxed">
+            {project.description}
+          </p>
 
-    return (
-        <Card
-            hoverable
-            className="cyber-card w-full overflow-hidden backdrop-blur-sm bg-gray-800/90 border-gray-700 [&_.ant-card-actions]:bg-gray-800/90 [&_.ant-card-actions]:border-gray-700 h-[350px] flex flex-col [&_.ant-card-body]:flex-1 [&_.ant-card-body]:overflow-auto [&_.ant-card-body]:flex [&_.ant-card-body]:flex-col"
-            cover={null}
-            actions={[
-                <Button
-                    key="github"
-                    type="text"
-                    icon={<GithubOutlined />}
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={handleGithubClick}
-                    className="cyber-btn-ghost text-xs sm:text-sm "
-                    size="small"
-                >
-                    <span className="hidden sm:inline">Code</span>
-                    <span className="sm:hidden">View</span>
-                </Button>,
-                project.demo && (
-                    <Button
-                        key="demo"
-                        type="text"
-                        icon={<LinkOutlined />}
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={handleDemoClick}
-                        className="cyber-btn-secondary text-xs sm:text-sm"
-                        size="small"
-                    >
-                        Demo
-                    </Button>
-                )
-            ].filter(Boolean)}
-        >
-            <div onClick={() => setIsExpanded(!isExpanded)} style={{ cursor: 'pointer' }} className="flex-1 overflow-y-auto">
-                <Title level={4} className="!mb-2 sm:!mb-3 !text-white !text-lg sm:!text-xl">
-                    {project.title}
-                </Title>
+          {/* Features */}
+          <div>
+            <h4 className="font-mono text-xs text-neon-purple tracking-wider mb-2">KEY FEATURES:</h4>
+            <ul className="space-y-1.5">
+              {project.features.map((f, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-text-primary/50 font-rajdhani">
+                  <span className="text-neon-blue/60 mt-1">▸</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                <Paragraph
-                    className="!text-gray-300 !text-sm sm:!text-base !leading-relaxed"
-                    ellipsis={{ rows: isExpanded ? 0 : 3, expandable: false }}
-                >
-                    {project.description}
-                </Paragraph>
+          {/* Tech Tags */}
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map((t, i) => (
+              <span
+                key={i}
+                className="font-mono text-[10px] px-2 py-1 border border-neon-blue/20 text-neon-blue/60 tracking-wider"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
 
-                <AnimatePresence>
-                    {isExpanded && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="mt-3 sm:mt-4 space-y-3 sm:space-y-4 overflow-hidden"
-                        >
-                            <div className="border-t border-gray-700 pt-3 sm:pt-4">
-                                <Title level={5} className="!mb-2 !text-white !text-sm sm:!text-base">
-                                    Key Features:
-                                </Title>
-                                <ul className="list-disc list-inside text-gray-300 space-y-1 text-sm sm:text-base">
-                                    {project.features.map((feature, i) => (
-                                        <li key={i}>{feature}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-
-                <div className="flex flex-wrap gap-1 sm:gap-2 mt-3 sm:mt-4">
-                    {project.tech.map((tech, i) => (
-                        <Tag
-                            key={i}
-                            color="blue"
-                            className="!text-xs !px-2 sm:!px-3 !py-1 !rounded-full !mb-1"
-                        >
-                            {tech}
-                        </Tag>
-                    ))}
-                </div>
-            </div>
-        </Card>
-    );
+          {/* Links */}
+          <div className="flex gap-4 pt-2">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackProjectClick(project.title, 'github')}
+              className="btn-neon text-xs py-2 px-4"
+            >
+              <FaGithub className="text-sm" />
+              SOURCE CODE
+            </a>
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackProjectClick(project.title, 'demo')}
+                className="btn-neon btn-neon-green text-xs py-2 px-4"
+              >
+                <FaExternalLinkAlt className="text-xs" />
+                LIVE DEMO
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const Projects = () => {
-    const sectionRef = useScrollAnimation();
-    const [currentPage, setCurrentPage] = useState(1);
-    const pageSize = 6;
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
+  const [expandedIndex, setExpandedIndex] = useState(null);
+  const [showAll, setShowAll] = useState(false);
 
-    const startIndex = (currentPage - 1) * pageSize;
-    const visibleProjects = projects.slice(startIndex, startIndex + pageSize);
+  const visibleProjects = showAll ? projects : projects.slice(0, 8);
 
-    const [ref] = useInView({
-        triggerOnce: true,
-        threshold: 0.1,
-    });
+  return (
+    <section id="projects" className="game-section relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Section Label */}
+          <div className="section-code-heading">{'// MISSION_LOG'}</div>
 
-    return (
-        <section ref={sectionRef} id="projects" className="section py-12 md:py-20 relative">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12 md:mb-16">
-                    <Title level={2} className="cyber-title-primary !text-4xl !font-bold !mb-4 relative inline-block group">
-                        Featured Projects
-                        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-green-500 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
-                    </Title>
-                </div>
+          {/* Section Title */}
+          <h2 className="font-orbitron text-3xl md:text-5xl font-bold mb-4">
+            <span className="text-text-primary">MISSION </span>
+            <span className="text-neon-blue" style={{ textShadow: '0 0 20px rgba(0,212,255,0.3)' }}>
+              LOG
+            </span>
+          </h2>
 
-                <Row gutter={[16, 24]} ref={ref} className="max-w-7xl mx-auto">
-                    {visibleProjects.map((project, index) => (
-                        <Col key={index} xs={24} sm={24} md={12} lg={8}>
-                            <ProjectCard project={project} />
-                        </Col>
-                    ))}
-                </Row>
+          <p className="font-rajdhani text-lg text-text-muted mb-12 md:mb-16 max-w-2xl">
+            A collection of completed missions — each project represents a challenge conquered
+            and skills leveled up.
+          </p>
 
-                <div className="flex justify-center mt-8">
-                    <Pagination
-                        current={currentPage}
-                        pageSize={pageSize}
-                        total={projects.length}
-                        className="projects-pagination"
-                        onChange={(page) => {
-                            setCurrentPage(page);
-                            const el = document.getElementById('projects');
-                            if (el) {
-                                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            }
-                        }}
-                        showSizeChanger={false}
-                    />
-                </div>
+          {/* Mission List */}
+          <div
+            ref={ref}
+            className="hud-panel"
+            style={{
+              opacity: inView ? 1 : 0,
+              transform: inView ? 'translateY(0)' : 'translateY(30px)',
+              transition: 'all 0.8s ease',
+            }}
+          >
+            {visibleProjects.map((project, index) => (
+              <MissionItem
+                key={index}
+                project={project}
+                index={index}
+                isExpanded={expandedIndex === index}
+                onToggle={() => {
+                  if (expandedIndex !== index) trackEvent('Project', 'Expand', project.title);
+                  setExpandedIndex(expandedIndex === index ? null : index);
+                }}
+              />
+            ))}
+          </div>
+
+          {/* View All Button */}
+          {!showAll && projects.length > 8 && (
+            <div className="text-center mt-8">
+              <button
+                onClick={() => setShowAll(true)}
+                className="btn-neon btn-neon-purple text-xs"
+              >
+                VIEW ALL MISSIONS ({projects.length})
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
             </div>
-        </section>
-    );
+          )}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Projects;
